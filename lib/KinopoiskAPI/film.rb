@@ -8,6 +8,10 @@ module KinopoiskAPI
       @json = json
     end
 
+    def get_json
+      @json
+    end
+
     def all
       {
           url: url,
@@ -15,6 +19,7 @@ module KinopoiskAPI
           original_title: original_title,
           slogan: slogan,
           description: description,
+          poster: poster,
           year: year,
           kinopoisk: kinopoisk,
           imdb: imdb,
