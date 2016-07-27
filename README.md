@@ -20,19 +20,33 @@ gem 'KinopoiskAPI' , github: 'afuno/Kinopoisk-API', branch: 'master'
 ### Фильм
 
 ```ruby
-kinopoisk = KinopoiskAPI::Film.new(733493)
+film = KinopoiskAPI::Film.new(733493)
 ```
 ```ruby
 #   Вся информация о фильме
-kinopoisk.all
+film.all
 ```
 ```ruby
 #   Название фильма на русском
-kinopoisk.title
+film.title
 ```
 ```ruby
 #   Оригинальное название фильма
-kinopoisk.original_title
+film.original_title
+```
+
+### Режисеры, актеры, операторы и т. д.
+
+```ruby
+staff = KinopoiskAPI::Staff.new(733493)
+```
+```ruby
+#   Все имена всех профессий
+staff.all
+```
+```ruby
+#   Все имена одной профессии
+staff.profession('writer')
 ```
 
 ## License
