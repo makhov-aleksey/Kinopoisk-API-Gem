@@ -62,13 +62,13 @@ module KinopoiskAPI
 
     def kinopoisk
       rating = @json['ratingData']['rating'].nil? ? nil : @json['ratingData']['rating']
-      quantity = @json['ratingData']['ratingVoteCount'].nil? ? nil : @json['ratingData']['ratingVoteCount'].delete(' ')
+      quantity = @json['ratingData']['ratingVoteCount'].nil? ? nil : @json['ratingData']['ratingVoteCount'].to_s.delete(' ').to_i
 
       good_reviews_in_percentage = @json['ratingData']['ratingGoodReview'].nil? ? nil : @json['ratingData']['ratingGoodReview']
-      number_of_good_reviews = @json['ratingData']['ratingGoodReviewVoteCount'].nil? ? nil : @json['ratingData']['ratingGoodReviewVoteCount'].delete(' ')
+      number_of_good_reviews = @json['ratingData']['ratingGoodReviewVoteCount'].nil? ? nil : @json['ratingData']['ratingGoodReviewVoteCount'].to_s.delete(' ').to_i
 
       waiting_in_percentage = @json['ratingData']['ratingAwait'].nil? ? nil : @json['ratingData']['ratingAwait']
-      number_of_waiting = @json['ratingData']['ratingAwaitCount'].nil? ? nil : @json['ratingData']['ratingAwaitCount']#.delete(' ')
+      number_of_waiting = @json['ratingData']['ratingAwaitCount'].nil? ? nil : @json['ratingData']['ratingAwaitCount'].to_s.delete(' ').to_i
 
       {
           rating: rating,
@@ -84,7 +84,7 @@ module KinopoiskAPI
 
     def imdb
       rating = @json['ratingData']['ratingIMDb'].nil? ? nil : @json['ratingData']['ratingIMDb']
-      quantity = @json['ratingData']['ratingIMDbVoteCount'].nil? ? nil : @json['ratingData']['ratingIMDbVoteCount'].delete(' ')
+      quantity = @json['ratingData']['ratingIMDbVoteCount'].nil? ? nil : @json['ratingData']['ratingIMDbVoteCount'].to_s.delete(' ').to_i
 
       {
           rating: rating,
