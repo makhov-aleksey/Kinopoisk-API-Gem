@@ -65,10 +65,10 @@ module KinopoiskAPI
       quantity = @json['ratingData']['ratingVoteCount'].nil? ? nil : @json['ratingData']['ratingVoteCount'].delete(' ')
 
       good_reviews_in_percentage = @json['ratingData']['ratingGoodReview'].nil? ? nil : @json['ratingData']['ratingGoodReview']
-      number_of_good_reviews = @json['ratingData']['ratingGoodReviewVoteCount'].nil? ? nil : @json['ratingData']['ratingGoodReviewVoteCount'].delete(' ')
+      number_of_good_reviews = @json['ratingData']['ratingGoodReviewVoteCount'].nil? ? nil : @json['ratingData']['ratingGoodReviewVoteCount']#.delete(' ')
 
       waiting_in_percentage = @json['ratingData']['ratingAwait'].nil? ? nil : @json['ratingData']['ratingAwait']
-      number_of_waiting = @json['ratingData']['ratingAwaitCount'].nil? ? nil : @json['ratingData']['ratingAwaitCount'].delete(' ')
+      number_of_waiting = @json['ratingData']['ratingAwaitCount'].nil? ? nil : @json['ratingData']['ratingAwaitCount']#.delete(' ')
 
       {
           rating: rating,
