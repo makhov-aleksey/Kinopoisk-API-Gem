@@ -27,12 +27,17 @@ module KinopoiskAPI
       hash = {}
       array = []
 
+      # @json['creators'].each do |creators|
+      #   creators.each do |items|
+      #     items.each do |item|
+      #       array.push(item)
+      #     end
+      #   end
+      # end
+
+
       @json['creators'].each do |creators|
-        creators.each do |items|
-          items.each do |item|
-            array.push(item)
-          end
-        end
+        array.push(creators)
       end
 
     end
