@@ -18,6 +18,25 @@ module KinopoiskAPI
       }
     end
 
+    def creators
+      @json['creators']
+    end
+
+    def test
+
+      hash = {}
+
+      @json['creators'].each do |creators|
+        creators.each do |items|
+          items.each do |item|
+            render json: item
+            break
+          end
+        end
+      end
+
+    end
+
     # def url
     #   @json['webURL']
     # end
