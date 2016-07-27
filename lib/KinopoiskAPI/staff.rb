@@ -25,12 +25,12 @@ module KinopoiskAPI
     def test
 
       hash = {}
+      array = []
 
       @json['creators'].each do |creators|
         creators.each do |items|
           items.each do |item|
-            item.id
-            break
+            array.push(item)
           end
         end
       end
