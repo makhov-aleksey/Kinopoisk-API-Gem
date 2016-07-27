@@ -9,16 +9,13 @@ TODO: Delete this and the text above, and describe your gem
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'KinopoiskAPI'
+gem 'KinopoiskAPI' , git: 'git://github.com/afuno/Kinopoisk-API.git', branch: 'master'
 ```
 
 And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install KinopoiskAPI
 
 ## Usage
 
