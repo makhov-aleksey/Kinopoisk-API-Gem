@@ -1,6 +1,7 @@
 require 'net/http'
 require 'KinopoiskAPI/film'
 require 'KinopoiskAPI/staff'
+require 'KinopoiskAPI/gallery'
 require 'KinopoiskAPI/version'
 
 module KinopoiskAPI
@@ -10,7 +11,8 @@ module KinopoiskAPI
           main: 'https://www.kinopoisk.ru',
           poster: {
               film: 'https://st.kp.yandex.net/images/film_iphone/iphone360',
-              name: 'https://st.kp.yandex.net/images/actor_iphone/iphone360'
+              name: 'https://st.kp.yandex.net/images/actor_iphone/iphone360',
+              gallery: 'https://st.kp.yandex.net/images'
           }
       }
   }
@@ -18,23 +20,19 @@ module KinopoiskAPI
   METHODS = {
       get_film: {
           method: 'getFilm',
-          id: 'filmID',
-          parameter: 'aaaaaa'
+          id: 'filmID'
       },
       get_gallery: {
           method: 'getGallery',
-          id: 'filmID',
-          parameter: 'aaaaaa'
+          id: 'filmID'
       },
       get_similar: {
           method: 'getSimilar',
-          id: 'filmID',
-          parameter: 'aaaaaa'
+          id: 'filmID'
       },
       get_name: {
           method: 'getStaff',
-          id: 'filmID',
-          parameter: 'aaaaaa'
+          id: 'filmID'
       },
       get_genres: {
           method: 'getGenres'
@@ -44,13 +42,11 @@ module KinopoiskAPI
       },
       get_reviews: {
           method: 'getReviews',
-          id: 'filmID',
-          parameter: 'aaaaaa'
+          id: 'filmID'
       },
       get_review_detail: {
           method: 'getReviewDetail',
-          id: 'reviewID',
-          parameter: 'aaaaaa'
+          id: 'reviewID'
       },
       get_people_detail: {
           method: 'getPeopleDetail'
@@ -63,18 +59,15 @@ module KinopoiskAPI
       },
       get_cinema_detail: {
           method: 'getCinemaDetail',
-          id: 'cinemaID',
-          parameter: 'aaaaaa'
+          id: 'cinemaID'
       },
       get_seance: {
           method: 'getSeance',
-          id: 'filmID',
-          parameter: 'aaaaaa'
+          id: 'filmID'
       },
       get_dates_for_detail_cinema: {
           method: 'getDatesForDetailCinema',
-          id: 'filmID',
-          parameter: 'aaaaaa'
+          id: 'filmID'
       },
       get_soon_films: {
           method: 'getSoonFilms'
