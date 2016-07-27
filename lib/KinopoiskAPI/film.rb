@@ -8,9 +8,9 @@ module KinopoiskAPI
       @json = json
     end
 
-    def get_json
-      @json
-    end
+    # def get_json
+    #   @json
+    # end
 
     def all
       {
