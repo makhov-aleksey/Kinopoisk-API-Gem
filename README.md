@@ -1,4 +1,4 @@
-# КиноПоиск API / Gem для Rails
+# КиноПоиск API (Gem)
 
 Гем основан на API от Andrzej Wielski: http://docs.kinopoiskapi.apiary.io/. Спасибо автору за такую великолепную реализацию.
 
