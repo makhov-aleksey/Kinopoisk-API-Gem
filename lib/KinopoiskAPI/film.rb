@@ -95,7 +95,7 @@ module KinopoiskAPI
       @json['ratingAgeLimits']
     end
 
-    privale
+    private
 
     def json
       uri = URI(@url)
