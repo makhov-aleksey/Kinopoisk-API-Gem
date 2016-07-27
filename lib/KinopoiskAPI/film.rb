@@ -8,11 +8,23 @@ module KinopoiskAPI
       @json = json
     end
 
-    def json
-      uri = URI(@url)
-      response = Net::HTTP.get(uri)
-
-      JSON.parse(response)
+    def all
+      {
+          url: url,
+          title: title,
+          original_title: original_title,
+          slogan: slogan,
+          description: description,
+          year: year,
+          kinopoisk: kinopoisk,
+          imdb: imdb,
+          number_of_reviews: number_of_reviews,
+          duration: duration,
+          countries: countries,
+          genres: genres,
+          video: video,
+          minimal_age: minimal_age
+      }
     end
 
     def url
@@ -81,6 +93,15 @@ module KinopoiskAPI
 
     def minimal_age
       @json['ratingAgeLimits']
+    end
+
+    privale
+
+    def json
+      uri = URI(@url)
+      response = Net::HTTP.get(uri)
+
+      JSON.parse(response)
     end
 
   end
