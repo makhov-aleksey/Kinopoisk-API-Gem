@@ -86,6 +86,25 @@ staff.profession('writer')
 * **poster** - Полный адрес на постер (в формате JPG)
 * **profession** - Профессия на русском (актер, режиссер и т. д.)
 
+### Галерея
+
+```ruby
+gallery = KinopoiskAPI::Gallery.new(733493)
+```
+```ruby
+#   Все изображения из всех разделов
+gallery.all
+```
+```ruby
+#   Все изображения из конкретного раздела
+gallery.section('poster')
+```
+
+Доступен вывод следующей информации:
+
+* **image** - Полный адрес на полное изображение (в формате JPG)
+* **preview** - Полный адрес на превью (в формате JPG)
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
