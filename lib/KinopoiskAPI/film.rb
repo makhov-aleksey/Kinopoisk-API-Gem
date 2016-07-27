@@ -53,7 +53,7 @@ module KinopoiskAPI
     end
 
     def poster
-      "#{DOMAINS[:kinopoisk][:poster]}_#{@id}.jpg"
+      "#{DOMAINS[:kinopoisk][:poster][:film]}_#{@id}.jpg"
     end
 
     def year

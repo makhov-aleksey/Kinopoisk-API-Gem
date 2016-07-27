@@ -37,6 +37,32 @@ film.title
 film.original_title
 ```
 
+Доступны следующие методы:
+
+* **url** - URL адрес страницы на КиноПоиск
+* **title** - Название на русском
+* **original_title** - Название на английском (оригинальное название)
+* **slogan** - Слоган
+* **description** - Описание
+* **poster** - Полный адрес на постер (в формате JPG)
+* **year** - Год выхода (у сериалов год начала и окончания)
+* **kinopoisk** - Массив следующих данных (КиноПоиск):
+    * **rating** - Рейтинг
+    * **quantity** - Количество оценивших
+    * **good_reviews_in_percentage** - Количество положительных рецензий в процентах
+    * **number_of_good_reviews** - Количество положительных рецензий
+    * **waiting_in_percentage** - Количество ожидающих в процентах
+    * **number_of_waiting** - Количество ожидающих
+* **imdb** - Массив следующих данных (IMDb)
+    * **rating** - Рейтинг
+    * **quantity** - Количество оценивших
+* **number_of_reviews** - Количество рецензий
+* **duration** - Продолжительность фильма или эпизода у сериала
+* **countries** - Страна или список стран
+* **genres** - Список жанров
+* **video** - Полный адрес на трейлер
+* **minimal_age** - Минимальный рекомендуемый возраст
+
 ### Режисеры, актеры, операторы и т. д.
 
 ```ruby
@@ -50,6 +76,25 @@ staff.all
 #   Все имена одной профессии
 staff.profession('writer')
 ```
+
+Доступны следующие методы:
+
+* **aaaa** - bbbb
+* **aaaa** - bbbb
+* **aaaa** - bbbb
+* **aaaa** - bbbb
+* **aaaa** - bbbb
+* **aaaa** - bbbb
+* **aaaa** - bbbb
+* **aaaa** - bbbb
+* **aaaa** - bbbb
+* **aaaa** - bbbb
+* **aaaa** - bbbb
+* **aaaa** - bbbb
+* **aaaa** - bbbb
+* **aaaa** - bbbb
+* **aaaa** - bbbb
+* **aaaa** - bbbb
 
 ## License
 

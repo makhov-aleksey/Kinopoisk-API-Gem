@@ -4,13 +4,14 @@ require 'KinopoiskAPI/staff'
 require 'KinopoiskAPI/version'
 
 module KinopoiskAPI
-  DOMAIN_API = 'http://api.kinopoisk.cf'
-
   DOMAINS = {
       api: 'http://api.kinopoisk.cf',
       kinopoisk: {
           main: 'https://www.kinopoisk.ru',
-          poster: 'https://st.kp.yandex.net/images/film_iphone/iphone360'
+          poster: {
+              film: 'https://st.kp.yandex.net/images/film_iphone/iphone360',
+              name: 'https://st.kp.yandex.net/images/actor_iphone/iphone360'
+          }
       }
   }
 
