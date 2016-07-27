@@ -18,28 +18,13 @@ module KinopoiskAPI
       }
     end
 
-    def creators
-      @json['creators']
-    end
-
-    def test
-
-      hash = {}
-      array = []
-
-      # @json['creators'].each do |creators|
-      #   creators.each do |items|
-      #     items.each do |item|
-      #       array.push(item)
-      #     end
-      #   end
-      # end
-
-
-      @json['creators'].each do |creators|
-        array.push(creators)
+    def correctly
+      correctly = {}
+      creators.each do |items|
+        items.each do |item|
+          correctly[item['professionKey']] = items
+        end
       end
-
     end
 
     # def url
@@ -53,6 +38,10 @@ module KinopoiskAPI
       response = Net::HTTP.get(uri)
 
       JSON.parse(response)
+    end
+
+    def creators
+      @json['creators']
     end
 
   end
