@@ -29,7 +29,7 @@ module KinopoiskAPI
       @json['creators'].each do |creators|
         creators.each do |items|
           items.each do |item|
-            item
+            item.id
             break
           end
         end
