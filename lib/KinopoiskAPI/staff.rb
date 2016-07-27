@@ -25,6 +25,7 @@ module KinopoiskAPI
           correctly[item['professionKey']] = items
         end
       end
+      correctly
     end
 
     # def url
