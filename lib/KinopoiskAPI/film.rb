@@ -4,7 +4,7 @@ module KinopoiskAPI
 
     def initialize(id)
       @id = id
-      @url = "#{DOMAIN_API}/#{METHODS[:get_film][:method]}?#{METHODS[:get_film][:id]}=#{id}"
+      @url = "#{DOMAINS[:api]}/#{METHODS[:get_film][:method]}?#{METHODS[:get_film][:id]}=#{id}"
       @json = json
     end
 
@@ -45,6 +45,10 @@ module KinopoiskAPI
 
     def description
       @json['description']
+    end
+
+    def poster
+      "#{DOMAINS[:kinopoisk][:poster]}_#{@id}.jpg"
     end
 
     def year
