@@ -17,7 +17,7 @@ module KinopoiskAPI
               original_title: item['nameEN'],
               year: item['year'],
               rating: item['rating'],
-              poster: "#{DOMAINS[:kinopoisk][:poster][:gallery]}/#{item['posterURL']}",
+              poster: "#{DOMAINS[:kinopoisk][:poster][:film]}_#{item['id']}.jpg",
               duration: item['filmLength'],
               countries: item['country'],
               genres: item['genre']
