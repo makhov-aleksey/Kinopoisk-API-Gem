@@ -8,17 +8,11 @@ module KinopoiskAPI
       @json = json
     end
 
-    def get_json
-      @json
-    end
+    # def get_json
+    #   @json
+    # end
 
     def all
-      {
-
-      }
-    end
-
-    def correctly
       correctly = {}
       creators.each do |items|
         items.each do |item|
@@ -28,9 +22,9 @@ module KinopoiskAPI
       correctly
     end
 
-    # def url
-    #   @json['webURL']
-    # end
+    def profession(name)
+      all[name]
+    end
 
     private
 
