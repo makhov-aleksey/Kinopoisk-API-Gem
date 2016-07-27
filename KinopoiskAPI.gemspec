@@ -4,15 +4,15 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'KinopoiskAPI/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "KinopoiskAPI"
+  spec.name          = 'KinopoiskAPI'
   spec.version       = KinopoiskAPI::VERSION
-  spec.authors       = ["proFox"]
-  spec.email         = ["profox.rus@gmail.com"]
+  spec.authors       = ['proFox']
+  spec.email         = ['profox.rus@gmail.com']
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
-  spec.license       = "MIT"
+  spec.summary       = %q{Gem for operation with Kinopoisk API}
+  spec.description   = %q{Gem is based on the API from the author: http://docs.kinopoiskapi.apiary.io}
+  spec.homepage      = 'https://github.com/afuno/Kinopoisk-API/'
+  spec.license       = 'MIT'
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
   # delete this section to allow pushing this gem to any host.
