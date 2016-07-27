@@ -105,6 +105,28 @@ gallery.section('poster')
 * **image** - Полный адрес на полное изображение (в формате JPG)
 * **preview** - Полный адрес на превью (в формате JPG)
 
+### Похожие
+
+```ruby
+similar = KinopoiskAPI::Similar.new(733493)
+```
+```ruby
+#   Все похожие фильмы
+similar.all
+```
+
+Доступен вывод следующей информации:
+
+* **title** - Название на русском
+* **original_title** - Название на английском (оригинальное название)
+* **year** - Год выхода (у сериалов год начала и окончания)
+* **rating** - Рейтинг
+* **number_of_rated** - Количество оценивших
+* **poster** - Полный адрес на постер (в формате JPG)
+* **duration** - Продолжительность фильма или эпизода у сериала
+* **countries** - Страна или список стран
+* **genres** - Список жанров
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).

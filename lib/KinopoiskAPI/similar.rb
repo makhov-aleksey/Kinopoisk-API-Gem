@@ -12,11 +12,13 @@ module KinopoiskAPI
       correctly = []
       json['items'].each do |items|
         items.each do |item|
+          rating_array = item['rating'].delete(' ').split('(')
           new_item = {
               title: item['nameRU'],
               original_title: item['nameEN'],
               year: item['year'],
-              rating: item['rating'],
+              rating: rating_array.first,
+              number_of_rated: rating_array.last.delete(')'),
               poster: "#{DOMAINS[:kinopoisk][:poster][:film]}_#{item['id']}.jpg",
               duration: item['filmLength'],
               countries: item['country'],
