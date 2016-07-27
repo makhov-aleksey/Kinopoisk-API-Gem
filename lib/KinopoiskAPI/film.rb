@@ -61,24 +61,34 @@ module KinopoiskAPI
     end
 
     def kinopoisk
+      rating = @json['ratingData']['rating'].nil? ? nil : @json['ratingData']['rating']
+      quantity = @json['ratingData']['ratingVoteCount'].nil? ? nil : @json['ratingData']['ratingVoteCount'].delete(' ')
+
+      good_reviews_in_percentage = @json['ratingData']['ratingGoodReview'].nil? ? nil : @json['ratingData']['ratingGoodReview']
+      number_of_good_reviews = @json['ratingData']['ratingGoodReviewVoteCount'].nil? ? nil : @json['ratingData']['ratingGoodReviewVoteCount'].delete(' ')
+
+      waiting_in_percentage = @json['ratingData']['ratingAwait'].nil? ? nil : @json['ratingData']['ratingAwait']
+      number_of_waiting = @json['ratingData']['ratingAwaitCount'].nil? ? nil : @json['ratingData']['ratingAwaitCount'].delete(' ')
+
       {
-          rating: @json['ratingData']['rating'],
-          # quantity: @json['ratingData']['ratingVoteCount'].delete(' '),
-          quantity: @json['ratingData']['ratingVoteCount'],
+          rating: rating,
+          quantity: quantity,
 
-          good_reviews_in_percentage: @json['ratingData']['ratingGoodReview'],
-          number_of_good_reviews: @json['ratingData']['ratingGoodReviewVoteCount'],
+          good_reviews_in_percentage: good_reviews_in_percentage,
+          number_of_good_reviews: number_of_good_reviews,
 
-          waiting_in_percentage: @json['ratingData']['ratingAwait'],
-          number_of_waiting: @json['ratingData']['ratingAwaitCount'].delete(' '),
+          waiting_in_percentage: waiting_in_percentage,
+          number_of_waiting: number_of_waiting
       }
     end
 
     def imdb
+      rating = @json['ratingData']['ratingIMDb'].nil? ? nil : @json['ratingData']['ratingIMDb']
+      quantity = @json['ratingData']['ratingIMDbVoteCount'].nil? ? nil : @json['ratingData']['ratingIMDbVoteCount'].delete(' ')
+
       {
-          rating: @json['ratingData']['ratingIMDb'],
-          # quantity: @json['ratingData']['ratingIMDbVoteCount'].delete(' ')
-          quantity: @json['ratingData']['ratingIMDbVoteCount']
+          rating: rating,
+          quantity: quantity
       }
     end
 
