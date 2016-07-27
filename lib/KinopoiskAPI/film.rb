@@ -16,11 +16,31 @@ module KinopoiskAPI
     end
 
     def title
-      @json.nameRU
+      @json['nameRU']
     end
 
     def original_title
-      @json.nameEN
+      @json['nameEN']
+    end
+
+    def slogan
+      @json['slogan']
+    end
+
+    def description
+      @json['description']
+    end
+
+    def year
+      @json['year']
+    end
+
+    def kinopoisk_rating
+      @json['ratingData']['rating']
+    end
+
+    def imdb_rating
+      @json['ratingData']['ratingIMDb']
     end
 
   end

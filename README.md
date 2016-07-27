@@ -9,7 +9,7 @@ TODO: Delete this and the text above, and describe your gem
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'KinopoiskAPI' , git: 'git://github.com/afuno/Kinopoisk-API.git', branch: 'master'
+gem 'KinopoiskAPI' , github: 'afuno/Kinopoisk-API', branch: 'master'
 ```
 
 And then execute:
