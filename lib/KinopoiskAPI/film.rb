@@ -63,7 +63,8 @@ module KinopoiskAPI
     def kinopoisk
       {
           rating: @json['ratingData']['rating'],
-          quantity: @json['ratingData']['ratingVoteCount'].delete(' '),
+          # quantity: @json['ratingData']['ratingVoteCount'].delete(' '),
+          quantity: @json['ratingData']['ratingVoteCount'],
 
           good_reviews_in_percentage: @json['ratingData']['ratingGoodReview'],
           number_of_good_reviews: @json['ratingData']['ratingGoodReviewVoteCount'],
@@ -76,7 +77,8 @@ module KinopoiskAPI
     def imdb
       {
           rating: @json['ratingData']['ratingIMDb'],
-          quantity: @json['ratingData']['ratingIMDbVoteCount'].delete(' ')
+          # quantity: @json['ratingData']['ratingIMDbVoteCount'].delete(' ')
+          quantity: @json['ratingData']['ratingIMDbVoteCount']
       }
     end
 
