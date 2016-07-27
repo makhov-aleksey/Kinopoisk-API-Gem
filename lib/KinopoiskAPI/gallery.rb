@@ -24,6 +24,10 @@ module KinopoiskAPI
       correctly
     end
 
+    def section(name)
+      all[name]
+    end
+
     private
 
     def json
