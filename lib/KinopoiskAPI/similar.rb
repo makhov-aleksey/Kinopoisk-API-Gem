@@ -14,8 +14,8 @@ module KinopoiskAPI
         items.each do |item|
           rating_array = item['rating'].delete(' ').split('(')
           new_item = {
-              title: item['nameRU'],
-              original_title: item['nameEN'],
+              title_ru: item['nameRU'],
+              title_en: item['nameEN'],
               year: item['year'],
               rating: rating_array.first,
               number_of_rated: rating_array.last.delete(')'),

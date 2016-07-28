@@ -36,8 +36,8 @@ module KinopoiskAPI
     def exactly
       rating_array = json_exactly['rating'].delete(' ').split('(')
       {
-          title: json_exactly['nameRU'],
-          original_title: json_exactly['nameEN'],
+          title_ru: json_exactly['nameRU'],
+          title_en: json_exactly['nameEN'],
           info: json_exactly['description'],
           duration: json_exactly['filmLength'],
           year: json_exactly['year'],
@@ -54,8 +54,8 @@ module KinopoiskAPI
       json_films.each do |film|
         rating_array = film['rating'].delete(' ').split('(')
         new_item = {
-            title: film['nameRU'],
-            original_title: film['nameEN'],
+            title_ru: film['nameRU'],
+            title_en: film['nameEN'],
             info: film['description'],
             duration: film['filmLength'],
             year: film['year'],

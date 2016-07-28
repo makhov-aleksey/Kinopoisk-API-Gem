@@ -16,8 +16,8 @@ module KinopoiskAPI
           new_item = {
               id: item['id'],
               url: "#{DOMAINS[:kinopoisk][:main]}/name/#{item['id']}",
-              full_name: item['nameRU'],
-              original_full_name: item['nameEN'],
+              full_name_ru: item['nameRU'],
+              full_name_en: item['nameEN'],
               poster: "#{DOMAINS[:kinopoisk][:poster][:name]}_#{item['id']}.jpg",
               profession: item['professionText']
           }
