@@ -1,5 +1,5 @@
 module KinopoiskAPI
-  class SearchGlobal
+  class GlobalSearch
     attr_accessor :keyword, :url, :json
 
     def initialize(keyword)
