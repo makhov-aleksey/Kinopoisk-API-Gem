@@ -2,6 +2,7 @@ require 'net/http'
 require 'KinopoiskAPI/film'
 require 'KinopoiskAPI/staff'
 require 'KinopoiskAPI/gallery'
+require 'KinopoiskAPI/similar'
 require 'KinopoiskAPI/version'
 
 module KinopoiskAPI
