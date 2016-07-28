@@ -9,7 +9,7 @@
 Добавьте эту строку в Gemfile вашего приложения:
 
 ```ruby
-gem 'KinopoiskAPI' , github: 'afuno/Kinopoisk-API', branch: 'master'
+gem 'KinopoiskAPI' , github: 'afuno/Kinopoisk-API-Gem', branch: 'master'
 ```
 
 Затем выполните:
@@ -126,6 +126,21 @@ similar.all
 * **duration** - Продолжительность фильма или эпизода у сериала
 * **countries** - Страна или список стран
 * **genres** - Список жанров
+
+### Жанры
+
+```ruby
+genres = KinopoiskAPI::Genres.new
+```
+```ruby
+#   Все жанры
+genres.all
+```
+
+Доступен вывод следующей информации:
+
+* **id** - Идентификатор жанра на сайте КиноПоиск
+* **name** - Жанр на русском
 
 ## License
 
