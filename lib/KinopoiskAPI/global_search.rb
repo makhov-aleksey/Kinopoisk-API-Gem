@@ -36,6 +36,8 @@ module KinopoiskAPI
       # }
 
       json['rating']
+
+      json
     end
 
     def maybe
