@@ -8,40 +8,41 @@ module KinopoiskAPI
       @json = json
     end
 
-    def number_of_pages
+    def all
+      {
+          number_of_pages: number_of_pages,
+          current_page: current_page,
+          quantity: quantity,
+          reviews: reviews
+      }
+    end
+
+    def pages
       @json['pagesCount']
     end
 
-    def current_page
+    def page
       @json['page']
     end
 
-    def number_of_reviews
-      @json['reviewAllCount']
-    end
-
-    def number_of_good_reviews
-      @json['reviewPositiveCount']
-    end
-
-    def number_of_good_reviews_in_percent
-      @json['reviewAllPositiveRatio']
-    end
-
-    def number_of_bad_reviews
-      @json['reviewNegativeCount']
-    end
-
-    def number_of_neutral_reviews
-      @json['reviewNeutralCount']
+    def quantity
+      {
+          reviews: @json['reviewAllCount'],
+          good_reviews: @json['reviewPositiveCount'],
+          good_reviews_in_percent: @json['reviewAllPositiveRatio'],
+          bad_reviews: @json['reviewNegativeCount'],
+          neutral_reviews: @json['reviewNeutralCount']
+      }
     end
 
     def reviews
       correctly = []
       json_reviews.each do |item|
+        type_array = item['reviewType'].split('_')
+        type = type_array.last
         new_item = {
             id: item['reviewID'],
-            type: item['reviewType'],
+            type: type,
             data: item['reviewData'],
             author: {
                 name: item['reviewAutor'],
