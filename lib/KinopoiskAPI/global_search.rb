@@ -77,7 +77,6 @@ module KinopoiskAPI
             full_name: name['nameRU'],
             original_full_name: name['nameEN'],
             info: name['description'],
-            duration: name['filmLength'],
             poster: "#{DOMAINS[:kinopoisk][:poster][:name]}_#{name['id']}.jpg"
         }
         correctly.push(new_item)
