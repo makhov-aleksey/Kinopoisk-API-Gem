@@ -9,7 +9,7 @@
 Добавьте эту строку в Gemfile вашего приложения:
 
 ```ruby
-gem 'KinopoiskAPI' , github: 'afuno/Kinopoisk-API', branch: 'master'
+gem 'KinopoiskAPI' , github: 'afuno/Kinopoisk-API-Gem', branch: 'master'
 ```
 
 Затем выполните:
