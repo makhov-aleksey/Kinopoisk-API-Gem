@@ -21,19 +21,21 @@ module KinopoiskAPI
     end
 
     def exactly
-      rating_array = json['rating'].delete(' ').split('(')
-      {
-          title: json['nameRU'],
-          original_title: json['nameEN'],
-          info: json['description'],
-          duration: json['filmLength'],
-          year: json['year'],
-          countries: json['country'],
-          genres: json['genre'],
-          rating: rating_array.first,
-          number_of_rated: rating_array.last.delete(')'),
-          poster: "#{DOMAINS[:kinopoisk][:poster][:film]}_#{json['id']}.jpg"
-      }
+      # rating_array = json['rating'].delete(' ').split('(')
+      # {
+      #     title: json['nameRU'],
+      #     original_title: json['nameEN'],
+      #     info: json['description'],
+      #     duration: json['filmLength'],
+      #     year: json['year'],
+      #     countries: json['country'],
+      #     genres: json['genre'],
+      #     rating: rating_array.first,
+      #     number_of_rated: rating_array.last.delete(')'),
+      #     poster: "#{DOMAINS[:kinopoisk][:poster][:film]}_#{json['id']}.jpg"
+      # }
+
+      json['rating']
     end
 
     def maybe
