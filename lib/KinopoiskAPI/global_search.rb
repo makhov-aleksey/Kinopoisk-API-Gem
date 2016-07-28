@@ -75,7 +75,7 @@ module KinopoiskAPI
     private
 
     def json
-      uri = URI(@url)
+      uri = URI(URI.encode(@url))
       response = Net::HTTP.get(uri)
 
       JSON.parse(response)
