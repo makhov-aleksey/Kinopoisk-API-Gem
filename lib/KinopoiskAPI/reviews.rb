@@ -10,8 +10,8 @@ module KinopoiskAPI
 
     def all
       {
-          number_of_pages: number_of_pages,
-          current_page: current_page,
+          pages: pages,
+          page: page,
           quantity: quantity,
           reviews: reviews
       }
