@@ -36,8 +36,10 @@ module KinopoiskAPI
     def exactly
       rating_array = json_exactly['rating'].delete(' ').split('(')
       {
-          title_ru: json_exactly['nameRU'],
-          title_en: json_exactly['nameEN'],
+          title: {
+              ru: json_exactly['nameRU'],
+              en: json_exactly['nameEN']
+          },
           info: json_exactly['description'],
           duration: json_exactly['filmLength'],
           year: json_exactly['year'],
@@ -54,8 +56,10 @@ module KinopoiskAPI
       json_films.each do |film|
         rating_array = film['rating'].delete(' ').split('(')
         new_item = {
-            title_ru: film['nameRU'],
-            title_en: film['nameEN'],
+            title: {
+                ru: json_exactly['nameRU'],
+                en: json_exactly['nameEN']
+            },
             info: film['description'],
             duration: film['filmLength'],
             year: film['year'],
@@ -74,8 +78,10 @@ module KinopoiskAPI
       correctly = []
       json_names.each do |name|
         new_item = {
-            full_name: name['nameRU'],
-            original_full_name: name['nameEN'],
+            full_name: {
+                ru: name['nameRU'],
+                en: name['nameEN']
+            },
             info: name['description'],
             poster: "#{DOMAINS[:kinopoisk][:poster][:name]}_#{name['id']}.jpg"
         }
