@@ -3,6 +3,7 @@ require 'KinopoiskAPI/film'
 require 'KinopoiskAPI/staff'
 require 'KinopoiskAPI/gallery'
 require 'KinopoiskAPI/similar'
+require 'KinopoiskAPI/genres'
 require 'KinopoiskAPI/version'
 
 module KinopoiskAPI
