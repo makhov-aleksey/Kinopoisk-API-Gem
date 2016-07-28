@@ -2,9 +2,8 @@ module KinopoiskAPI
   class Genres
     attr_accessor :id, :url, :json
 
-    def initialize(id)
-      @id = id
-      @url = "#{DOMAINS[:api]}/#{METHODS[:get_similar][:method]}?#{METHODS[:get_similar][:id]}=#{id}"
+    def initialize
+      @url = "#{DOMAINS[:api]}/#{METHODS[:get_genres][:method]}"
       @json = json
     end
 
