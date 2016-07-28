@@ -21,23 +21,19 @@ module KinopoiskAPI
     end
 
     def exactly
-      # rating_array = json['rating'].delete(' ').split('(')
-      # {
-      #     title: json['nameRU'],
-      #     original_title: json['nameEN'],
-      #     info: json['description'],
-      #     duration: json['filmLength'],
-      #     year: json['year'],
-      #     countries: json['country'],
-      #     genres: json['genre'],
-      #     rating: rating_array.first,
-      #     number_of_rated: rating_array.last.delete(')'),
-      #     poster: "#{DOMAINS[:kinopoisk][:poster][:film]}_#{json['id']}.jpg"
-      # }
-
-      json['rating']
-
-      json
+      rating_array = json_exactly['rating'].delete(' ').split('(')
+      {
+          title: json_exactly['nameRU'],
+          original_title: json_exactly['nameEN'],
+          info: json_exactly['description'],
+          duration: json_exactly['filmLength'],
+          year: json_exactly['year'],
+          countries: json_exactly['country'],
+          genres: json_exactly['genre'],
+          rating: rating_array.first,
+          number_of_rated: rating_array.last.delete(')'),
+          poster: "#{DOMAINS[:kinopoisk][:poster][:film]}_#{json_exactly['id']}.jpg"
+      }
     end
 
     def maybe
@@ -83,6 +79,10 @@ module KinopoiskAPI
       response = Net::HTTP.get(uri)
 
       JSON.parse(response)
+    end
+
+    def json_exactly
+      @json['youmean']
     end
 
     def json_films
