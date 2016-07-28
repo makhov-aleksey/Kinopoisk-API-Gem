@@ -4,6 +4,8 @@ require 'KinopoiskAPI/staff'
 require 'KinopoiskAPI/gallery'
 require 'KinopoiskAPI/similar'
 require 'KinopoiskAPI/genres'
+require 'KinopoiskAPI/reviews'
+require 'KinopoiskAPI/global_search'
 require 'KinopoiskAPI/version'
 
 module KinopoiskAPI
