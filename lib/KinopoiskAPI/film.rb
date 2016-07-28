@@ -11,8 +11,7 @@ module KinopoiskAPI
     def all
       {
           url: url,
-          title_ru: title_ru,
-          title_en: title_en,
+          title: title,
           slogan: slogan,
           description: description,
           poster: poster,
@@ -32,12 +31,11 @@ module KinopoiskAPI
       @json['webURL']
     end
 
-    def title_ru
-      @json['nameRU']
-    end
-
-    def title_en
-      @json['nameEN']
+    def title
+      {
+          ru: @json['nameRU'],
+          en: @json['nameEN']
+      }
     end
 
     def slogan
