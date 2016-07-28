@@ -127,6 +127,21 @@ similar.all
 * **countries** - Страна или список стран
 * **genres** - Список жанров
 
+### Жанры
+
+```ruby
+genres = KinopoiskAPI::Genres.new
+```
+```ruby
+#   Все жанры
+genres.all
+```
+
+Доступен вывод следующей информации:
+
+* **id** - Идентификатор жанра на сайте КиноПоиск
+* **name** - Жанр на русском
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
