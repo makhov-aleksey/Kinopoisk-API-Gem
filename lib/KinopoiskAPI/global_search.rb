@@ -8,6 +8,19 @@ module KinopoiskAPI
       @json = json
     end
 
+    def all
+      {
+          keyword: keyword,
+          quantity: {
+              films: number_of_films,
+              names: number_of_names
+          },
+          exactly: exactly,
+          maybe: maybe,
+          names: names
+      }
+    end
+
     def keyword
       @json['keyword']
     end
