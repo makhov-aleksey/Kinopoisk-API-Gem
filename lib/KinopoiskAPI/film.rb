@@ -39,17 +39,17 @@ module KinopoiskAPI
 
     def title
       {
-          ru: @json['nameRU'],
-          en: @json['nameEN']
+          ru: @json['nameRU'].present? ? @json['nameRU'] : nil,
+          en: @json['nameEN'].present? ? @json['nameEN'] : nil
       }
     end
 
     def slogan
-      @json['slogan']
+      @json['slogan'].present? ? @json['slogan'] : nil
     end
 
     def description
-      @json['description']
+      @json['description'].present? ? @json['description'] : nil
     end
 
     def poster
