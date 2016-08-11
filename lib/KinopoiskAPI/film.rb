@@ -102,11 +102,11 @@ module KinopoiskAPI
     end
 
     def countries
-      @json['country'].split(',')
+      @json['country'].split(',').map { |country| country.strip }
     end
 
     def genres
-      @json['genre'].split(',')
+      @json['genre'].split(',').map { |genre| genre.strip }
     end
 
     def video

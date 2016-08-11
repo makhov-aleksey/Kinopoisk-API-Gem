@@ -23,8 +23,8 @@ module KinopoiskAPI
               number_of_rated: rating_array.last.delete(')'),
               poster: "#{DOMAINS[:kinopoisk][:poster][:film]}_#{item['id']}.jpg",
               duration: item['filmLength'],
-              countries: item['country'],
-              genres: item['genre']
+              countries: item['country'].split(',').map { |country| country.strip },
+              genres: item['genre'].split(',').map { |genre| genre.strip }
           }
           correctly.push(new_item)
         end

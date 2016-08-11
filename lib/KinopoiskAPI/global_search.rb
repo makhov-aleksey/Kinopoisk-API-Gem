@@ -43,8 +43,8 @@ module KinopoiskAPI
           info: json_exactly['description'],
           duration: json_exactly['filmLength'],
           year: json_exactly['year'],
-          countries: json_exactly['country'],
-          genres: json_exactly['genre'],
+          countries: json_exactly['country'].split(',').map { |country| country.strip },
+          genres: json_exactly['genre'].split(',').map { |genre| genre.strip },
           rating: rating_array.first,
           number_of_rated: rating_array.last.delete(')'),
           poster: "#{DOMAINS[:kinopoisk][:poster][:film]}_#{json_exactly['id']}.jpg"
@@ -63,8 +63,8 @@ module KinopoiskAPI
             info: film['description'],
             duration: film['filmLength'],
             year: film['year'],
-            countries: film['country'],
-            genres: film['genre'],
+            countries: film['country'].split(',').map { |country| country.strip },
+            genres: film['genre'].split(',').map { |genre| genre.strip },
             rating: rating_array.first,
             number_of_rated: rating_array.last.delete(')'),
             poster: "#{DOMAINS[:kinopoisk][:poster][:film]}_#{film['id']}.jpg"
