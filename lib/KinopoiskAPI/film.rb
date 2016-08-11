@@ -137,13 +137,15 @@ module KinopoiskAPI
       @json['ratingAgeLimits']
     end
 
+    def status
+      json.nil? ? false : true
+    end
+
     private
 
     def json
       uri = URI(@url)
       response = Net::HTTP.get(uri)
-
-
 
       if KinopoiskAPI::valid_json?(response)
         JSON.parse(response)
