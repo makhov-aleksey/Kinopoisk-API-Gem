@@ -7,11 +7,11 @@ Gem::Specification.new do |spec|
   spec.name          = 'KinopoiskAPI'
   spec.version       = KinopoiskAPI::VERSION
   spec.authors       = ['proFox']
-  spec.email         = ['profox.rus@gmail.com']
+  spec.email         = ['admin@byprofox.com']
 
   spec.summary       = %q{Gem for operation with Kinopoisk API}
   spec.description   = %q{Gem is based on the API from the author: http://docs.kinopoiskapi.apiary.io}
-  spec.homepage      = 'https://github.com/afuno/Kinopoisk-API/'
+  spec.homepage      = 'https://github.com/afuno/Kinopoisk-API-Gem/'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }

@@ -10,6 +10,7 @@ module KinopoiskAPI
 
     def all
       {
+          id: @id,
           url: url,
           title: title,
           slogan: slogan,
@@ -23,6 +24,11 @@ module KinopoiskAPI
           countries: countries,
           genres: genres,
           video: video,
+          is_sequel_or_prequel: is_sequel_or_prequel,
+          is_similar_films: is_similar_films,
+          is_imax: is_imax,
+          is_3d: is_3d,
+          rating_mpaa: rating_mpaa,
           minimal_age: minimal_age
       }
     end
@@ -81,6 +87,7 @@ module KinopoiskAPI
       quantity = @json['ratingData']['ratingIMDbVoteCount'].nil? ? nil : @json['ratingData']['ratingIMDbVoteCount'].to_s.delete(' ').to_i
 
       {
+          id: @json['imdbID'],
           rating: rating,
           quantity: quantity
       }
@@ -95,15 +102,35 @@ module KinopoiskAPI
     end
 
     def countries
-      @json['country']
+      @json['country'].split(',')
     end
 
     def genres
-      @json['genre']
+      @json['genre'].split(',')
     end
 
     def video
       @json['videoURL']
+    end
+
+    def is_sequel_or_prequel
+      @json['isHasSequelsAndPrequelsFilms'].present? ? @json['isHasSequelsAndPrequelsFilms'] : false
+    end
+
+    def is_similar_films
+      @json['isHasSimilarFilms'].present? ? @json['isHasSimilarFilms'] : false
+    end
+
+    def is_imax
+      @json['isIMAX'].present? ? @json['isIMAX'] : false
+    end
+
+    def is_3d
+      @json['is3D'].present? ? @json['is3D'] : false
+    end
+
+    def rating_mpaa
+      @json['ratingMPAA']
     end
 
     def minimal_age
