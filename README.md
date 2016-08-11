@@ -30,11 +30,11 @@ film.all
 ```
 ```ruby
 #   Название фильма на русском
-film.title.ru
+film.title[:ru]
 ```
 ```ruby
 #   Название фильма на английском
-film.title.en
+film.title[:en]
 ```
 
 Доступен вывод следующей информации:
@@ -220,7 +220,7 @@ reviews = KinopoiskAPI::Reviews.new(733493)
 ```
 ```ruby
 #   Количество рецензий
-reviews.quantity.reviews
+reviews.quantity[:reviews]
 ```
 ```ruby
 #   Рецензии
