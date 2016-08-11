@@ -127,7 +127,7 @@ module KinopoiskAPI
     end
   end
 
-  def valid_json?(json)
+  def self.valid_json?(json)
     begin
       JSON.parse(json)
       return true
