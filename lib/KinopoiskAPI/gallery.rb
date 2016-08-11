@@ -28,13 +28,20 @@ module KinopoiskAPI
       all[name]
     end
 
+    def status
+      json.nil? ? false : true
+    end
+
     private
 
     def json
       uri = URI(@url)
       response = Net::HTTP.get(uri)
-
-      JSON.parse(response)
+      if KinopoiskAPI::valid_json?(response)
+        JSON.parse(response)
+      else
+        nil
+      end
     end
 
     def gallery
