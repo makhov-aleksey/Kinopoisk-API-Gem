@@ -83,8 +83,14 @@ module KinopoiskAPI
     end
 
     def imdb
-      rating = @json['ratingData']['ratingIMDb'].nil? ? 0.0 : @json['ratingData']['ratingIMDb']
-      quantity = @json['ratingData']['ratingIMDbVoteCount'].nil? ? 0 : @json['ratingData']['ratingIMDbVoteCount'].to_s.delete(' ').to_i
+
+      if !@json['ratingData'].nil?
+        rating = @json['ratingData']['ratingIMDb'].nil? ? 0.0 : @json['ratingData']['ratingIMDb']
+        quantity = @json['ratingData']['ratingIMDbVoteCount'].nil? ? 0 : @json['ratingData']['ratingIMDbVoteCount'].to_s.delete(' ').to_i
+      else
+        rating = 0.0
+        quantity = 0
+      end
 
       {
           id: @json['imdbID'],
