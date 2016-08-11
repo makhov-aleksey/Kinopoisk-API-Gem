@@ -143,7 +143,9 @@ module KinopoiskAPI
       uri = URI(@url)
       response = Net::HTTP.get(uri)
 
-      if valid_json?(response)
+
+
+      if KinopoiskAPI::valid_json?(response)
         JSON.parse(response)
       else
         nil
