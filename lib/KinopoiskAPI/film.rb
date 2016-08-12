@@ -61,7 +61,7 @@ module KinopoiskAPI
     end
 
     def kinopoisk
-      if !@json['ratingData'].any?
+      if !@json['ratingData'].nil?
         rating = @json['ratingData']['rating'].nil? ? nil : @json['ratingData']['rating']
         quantity = @json['ratingData']['ratingVoteCount'].nil? ? nil : @json['ratingData']['ratingVoteCount'].to_s.delete(' ').to_i
       else
@@ -88,7 +88,7 @@ module KinopoiskAPI
     end
 
     def imdb
-      if !@json['ratingData'].any?
+      if !@json['ratingData'].nil?
         rating = @json['ratingData']['ratingIMDb'].nil? ? 0.0 : @json['ratingData']['ratingIMDb']
         quantity = @json['ratingData']['ratingIMDbVoteCount'].nil? ? 0 : @json['ratingData']['ratingIMDbVoteCount'].to_s.delete(' ').to_i
       else
