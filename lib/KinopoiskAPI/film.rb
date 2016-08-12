@@ -34,22 +34,22 @@ module KinopoiskAPI
     end
 
     def url
-      @json['webURL']
+      @json['webURL'].present? ? @json['webURL'] : nil
     end
 
     def title
       {
-          ru: @json['nameRU'],
-          en: @json['nameEN']
+          ru: @json['nameRU'].present? ? @json['nameRU'] : nil,
+          en: @json['nameEN'].present? ? @json['nameEN'] : nil
       }
     end
 
     def slogan
-      @json['slogan']
+      @json['slogan'].present? ? @json['slogan'] : nil
     end
 
     def description
-      @json['description']
+      @json['description'].present? ? @json['description'] : nil
     end
 
     def poster
@@ -57,18 +57,43 @@ module KinopoiskAPI
     end
 
     def year
-      @json['year']
+      @json['year'].present? ? @json['year'] : nil
     end
 
     def kinopoisk
-      rating = @json['ratingData']['rating'].nil? ? nil : @json['ratingData']['rating']
-      quantity = @json['ratingData']['ratingVoteCount'].nil? ? nil : @json['ratingData']['ratingVoteCount'].to_s.delete(' ').to_i
+      local_data = @json['ratingData']
 
-      good_reviews_in_percentage = @json['ratingData']['ratingGoodReview'].nil? ? nil : @json['ratingData']['ratingGoodReview']
-      number_of_good_reviews = @json['ratingData']['ratingGoodReviewVoteCount'].nil? ? nil : @json['ratingData']['ratingGoodReviewVoteCount'].to_s.delete(' ').to_i
+      if !local_data.nil?
+        rating = @json['ratingData']['rating'].nil? ? nil : @json['ratingData']['rating']
+        quantity = @json['ratingData']['ratingVoteCount'].nil? ? nil : @json['ratingData']['ratingVoteCount'].to_s.delete(' ').to_i
 
-      waiting_in_percentage = @json['ratingData']['ratingAwait'].nil? ? nil : @json['ratingData']['ratingAwait']
-      number_of_waiting = @json['ratingData']['ratingAwaitCount'].nil? ? nil : @json['ratingData']['ratingAwaitCount'].to_s.delete(' ').to_i
+        good_reviews_in_percentage = @json['ratingData']['ratingGoodReview'].nil? ? nil : @json['ratingData']['ratingGoodReview']
+        number_of_good_reviews = @json['ratingData']['ratingGoodReviewVoteCount'].nil? ? nil : @json['ratingData']['ratingGoodReviewVoteCount'].to_s.delete(' ').to_i
+
+        waiting_in_percentage = @json['ratingData']['ratingAwait'].nil? ? nil : @json['ratingData']['ratingAwait']
+        number_of_waiting = @json['ratingData']['ratingAwaitCount'].nil? ? nil : @json['ratingData']['ratingAwaitCount'].to_s.delete(' ').to_i
+
+        film_critics_in_percentage = @json['ratingData']['ratingFilmCritics'].nil? ? nil : @json['ratingData']['ratingFilmCritics']
+        film_critics = @json['ratingData']['ratingFilmCriticsVoteCount'].nil? ? nil : @json['ratingData']['ratingFilmCriticsVoteCount'].to_s.delete(' ').to_i
+
+        rf_critics_in_percentage = @json['ratingData']['ratingRFCritics'].nil? ? nil : @json['ratingData']['ratingRFCritics']
+        rf_critics = @json['ratingData']['ratingRFCriticsVoteCount'].nil? ? nil : @json['ratingData']['ratingRFCriticsVoteCount'].to_s.delete(' ').to_i
+      else
+        rating = 0.0
+        quantity = 0
+
+        good_reviews_in_percentage = '0%'
+        number_of_good_reviews = 0
+
+        waiting_in_percentage = '0%'
+        number_of_waiting = 0
+
+        film_critics_in_percentage = '0%'
+        film_critics = 0
+
+        rf_critics_in_percentage = '0%'
+        rf_critics = 0
+      end
 
       {
           rating: rating,
@@ -78,13 +103,26 @@ module KinopoiskAPI
           number_of_good_reviews: number_of_good_reviews,
 
           waiting_in_percentage: waiting_in_percentage,
-          number_of_waiting: number_of_waiting
+          number_of_waiting: number_of_waiting,
+
+          film_critics_in_percentage: film_critics_in_percentage,
+          film_critics: film_critics,
+
+          rf_critics_in_percentage: rf_critics_in_percentage,
+          rf_critics: rf_critics
       }
     end
 
     def imdb
-      rating = @json['ratingData']['ratingIMDb'].nil? ? nil : @json['ratingData']['ratingIMDb']
-      quantity = @json['ratingData']['ratingIMDbVoteCount'].nil? ? nil : @json['ratingData']['ratingIMDbVoteCount'].to_s.delete(' ').to_i
+      local_data = @json['ratingData']
+
+      if !local_data.nil?
+        rating = @json['ratingData']['ratingIMDb'].nil? ? 0.0 : @json['ratingData']['ratingIMDb']
+        quantity = @json['ratingData']['ratingIMDbVoteCount'].nil? ? 0 : @json['ratingData']['ratingIMDbVoteCount'].to_s.delete(' ').to_i
+      else
+        rating = 0.0
+        quantity = 0
+      end
 
       {
           id: @json['imdbID'],
@@ -94,23 +132,23 @@ module KinopoiskAPI
     end
 
     def number_of_reviews
-      @json['reviewsCount']
+      @json['reviewsCount'].present? ? @json['year'] : nil
     end
 
     def duration
-      @json['filmLength']
+      @json['filmLength'].present? ? @json['filmLength'] : 0
     end
 
     def countries
-      @json['country'].split(',').map { |country| country.strip }
+      @json['country'].present? ? @json['country'].split(',').map { |country| country.strip } : nil
     end
 
     def genres
-      @json['genre'].split(',').map { |genre| genre.strip }
+      @json['genre'].present? ?  @json['genre'].split(',').map { |genre| genre.strip } : nil
     end
 
     def video
-      @json['videoURL']
+      @json['videoURL'].present? ? @json['videoURL'] : nil
     end
 
     def is_sequel_or_prequel
@@ -130,11 +168,11 @@ module KinopoiskAPI
     end
 
     def rating_mpaa
-      @json['ratingMPAA']
+      @json['ratingMPAA'].present? ? @json['ratingMPAA'] : nil
     end
 
     def minimal_age
-      @json['ratingAgeLimits']
+      @json['ratingAgeLimits'].present? ? @json['ratingAgeLimits'] : 0
     end
 
     def status
