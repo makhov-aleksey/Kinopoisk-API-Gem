@@ -34,7 +34,7 @@ module KinopoiskAPI
     end
 
     def url
-      @json['webURL']
+      @json['webURL'].present? ? @json['webURL'] : nil
     end
 
     def title
@@ -57,12 +57,17 @@ module KinopoiskAPI
     end
 
     def year
-      @json['year']
+      @json['year'].present? ? @json['year'] : nil
     end
 
     def kinopoisk
-      rating = @json['ratingData']['rating'].nil? ? nil : @json['ratingData']['rating']
-      quantity = @json['ratingData']['ratingVoteCount'].nil? ? nil : @json['ratingData']['ratingVoteCount'].to_s.delete(' ').to_i
+      if !@json['ratingData'].nil?
+        rating = @json['ratingData']['rating'].nil? ? nil : @json['ratingData']['rating']
+        quantity = @json['ratingData']['ratingVoteCount'].nil? ? nil : @json['ratingData']['ratingVoteCount'].to_s.delete(' ').to_i
+      else
+        rating = 0.0
+        quantity = 0
+      end
 
       good_reviews_in_percentage = @json['ratingData']['ratingGoodReview'].nil? ? nil : @json['ratingData']['ratingGoodReview']
       number_of_good_reviews = @json['ratingData']['ratingGoodReviewVoteCount'].nil? ? nil : @json['ratingData']['ratingGoodReviewVoteCount'].to_s.delete(' ').to_i
@@ -83,7 +88,6 @@ module KinopoiskAPI
     end
 
     def imdb
-
       if !@json['ratingData'].nil?
         rating = @json['ratingData']['ratingIMDb'].nil? ? 0.0 : @json['ratingData']['ratingIMDb']
         quantity = @json['ratingData']['ratingIMDbVoteCount'].nil? ? 0 : @json['ratingData']['ratingIMDbVoteCount'].to_s.delete(' ').to_i
@@ -100,23 +104,23 @@ module KinopoiskAPI
     end
 
     def number_of_reviews
-      @json['reviewsCount']
+      @json['reviewsCount'].present? ? @json['year'] : nil
     end
 
     def duration
-      @json['filmLength']
+      @json['filmLength'].present? ? @json['filmLength'] : 0
     end
 
     def countries
-      @json['country'].split(',').map { |country| country.strip }
+      @json['country'].present? ? @json['country'].split(',').map { |country| country.strip } : nil
     end
 
     def genres
-      @json['genre'].split(',').map { |genre| genre.strip }
+      @json['genre'].present? ?  @json['genre'].split(',').map { |genre| genre.strip } : nil
     end
 
     def video
-      @json['videoURL']
+      @json['videoURL'].present? ? @json['videoURL'] : nil
     end
 
     def is_sequel_or_prequel
@@ -136,11 +140,11 @@ module KinopoiskAPI
     end
 
     def rating_mpaa
-      @json['ratingMPAA']
+      @json['ratingMPAA'].present? ? @json['ratingMPAA'] : nil
     end
 
     def minimal_age
-      @json['ratingAgeLimits']
+      @json['ratingAgeLimits'].present? ? @json['ratingAgeLimits'] : 0
     end
 
     def status
