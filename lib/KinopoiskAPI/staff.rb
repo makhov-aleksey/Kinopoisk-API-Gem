@@ -10,23 +10,25 @@ module KinopoiskAPI
 
     def all
       correctly = {}
-      creators.each do |items|
-        new_items = []
-        items.each do |item|
-          new_item = {
-              id: item['id'],
-              url: "#{DOMAINS[:kinopoisk][:main]}/name/#{item['id']}",
-              full_name: {
-                  ru: item['nameRU'],
-                  en: item['nameEN']
-              },
-              poster: "#{DOMAINS[:kinopoisk][:poster][:name]}_#{item['id']}.jpg",
-              profession: item['professionText']
-          }
-          new_items.push(new_item)
-        end
-        items.each do |item|
-          correctly[item['professionKey']] = new_items
+      unless creators.nil?
+        creators.each do |items|
+          new_items = []
+          items.each do |item|
+            new_item = {
+                id: item['id'],
+                url: "#{DOMAINS[:kinopoisk][:main]}/name/#{item['id']}",
+                full_name: {
+                    ru: item['nameRU'],
+                    en: item['nameEN']
+                },
+                poster: "#{DOMAINS[:kinopoisk][:poster][:name]}_#{item['id']}.jpg",
+                profession: item['professionText']
+            }
+            new_items.push(new_item)
+          end
+          items.each do |item|
+            correctly[item['professionKey']] = new_items
+          end
         end
       end
       correctly
@@ -53,7 +55,7 @@ module KinopoiskAPI
     end
 
     def creators
-      @json['creators']
+      @json['creators'].nil? ? nil : @json['creators']
     end
 
   end

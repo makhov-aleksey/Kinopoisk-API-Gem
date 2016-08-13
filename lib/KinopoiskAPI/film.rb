@@ -178,7 +178,7 @@ module KinopoiskAPI
 
     def names
       correctly = {}
-      if creators.any?
+      unless creators.nil?
         creators.each do |items|
           new_items = []
           items.each do |item|
