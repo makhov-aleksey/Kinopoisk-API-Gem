@@ -175,6 +175,33 @@ module KinopoiskAPI
       @json['ratingAgeLimits'].present? ? @json['ratingAgeLimits'] : 0
     end
 
+    def all_names
+      correctly = {}
+      if creators.any?
+        creators.each do |items|
+          new_items = []
+          items.each do |item|
+            new_item = {
+                id: item['id'],
+                url: "#{DOMAINS[:kinopoisk][:main]}/name/#{item['id']}",
+                full_name: {
+                    ru: item['nameRU'].present? ? item['nameRU'] : nil,
+                    en: item['nameEN'].present? ? item['nameEN'] : nil
+                },
+                description: item['description'].present? ? item['description'] : nil,
+                poster: "#{DOMAINS[:kinopoisk][:poster][:name]}_#{item['id']}.jpg",
+                profession: item['professionText'].present? ? item['professionText'] : nil
+            }
+            new_items.push(new_item)
+          end
+          items.each do |item|
+            correctly[item['professionKey']] = new_items
+          end
+        end
+      end
+      correctly
+    end
+
     def status
       json.nil? ? false : true
     end
@@ -189,6 +216,10 @@ module KinopoiskAPI
       else
         nil
       end
+    end
+
+    def creators
+      @json['creators'].nil? ? nil : @json['creators']
     end
 
   end
