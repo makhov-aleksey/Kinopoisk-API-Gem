@@ -29,7 +29,8 @@ module KinopoiskAPI
           is_imax: is_imax,
           is_3d: is_3d,
           rating_mpaa: rating_mpaa,
-          minimal_age: minimal_age
+          minimal_age: minimal_age,
+          names: all_names
       }
     end
 
@@ -175,7 +176,7 @@ module KinopoiskAPI
       @json['ratingAgeLimits'].present? ? @json['ratingAgeLimits'] : 0
     end
 
-    def all_names
+    def names
       correctly = {}
       if creators.any?
         creators.each do |items|
@@ -200,6 +201,10 @@ module KinopoiskAPI
         end
       end
       correctly
+    end
+
+    def name_profession(name)
+      names[name]
     end
 
     def status
