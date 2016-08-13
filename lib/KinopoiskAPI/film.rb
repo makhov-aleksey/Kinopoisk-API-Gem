@@ -204,7 +204,7 @@ module KinopoiskAPI
     end
 
     def name_profession(name)
-      names[name].blank? ? nil : names[name]
+      names[name].any? ? names[name] : nil
     end
 
     def status
