@@ -204,7 +204,7 @@ module KinopoiskAPI
     end
 
     def name_profession(name)
-      names[name].nil?
+      names[name].nil? ? nil : names[name]
     end
 
     def status
