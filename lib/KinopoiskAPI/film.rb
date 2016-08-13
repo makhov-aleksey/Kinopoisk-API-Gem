@@ -224,6 +224,7 @@ module KinopoiskAPI
     end
 
     def creators
+      puts @json['creators']
       @json['creators'].any ? @json['creators'] : nil
     end
 
