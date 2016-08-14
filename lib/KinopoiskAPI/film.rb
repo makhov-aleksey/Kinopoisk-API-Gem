@@ -220,18 +220,17 @@ module KinopoiskAPI
       if KinopoiskAPI::valid_json?(response)
         JSON.parse(response)
       else
-        JSON.generate({error: 'Error retrieving JSON'})
+        # JSON.generate({error: 'Error retrieving JSON'})
+        nil
       end
     end
 
     def creators
-
-      puts json
-
-      puts @json
-
-
-      @json['creators'].present? ? @json['creators'] : nil
+      if @json.present?
+        @json['creators'].present? ? @json['creators'] : nil
+      else
+        nil
+      end
     end
 
   end
