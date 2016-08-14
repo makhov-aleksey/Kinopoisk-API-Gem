@@ -182,6 +182,7 @@ module KinopoiskAPI
         creators.each do |items|
           new_items = []
           items.each do |item|
+            poster = item['posterURL'].present? ? "#{DOMAINS[:kinopoisk][:poster][:name]}_#{item['id']}.jpg" : nil
             new_item = {
                 id: item['id'],
                 url: "#{DOMAINS[:kinopoisk][:main]}/name/#{item['id']}",
@@ -190,7 +191,7 @@ module KinopoiskAPI
                     en: item['nameEN'].present? ? item['nameEN'] : nil
                 },
                 description: item['description'].present? ? item['description'] : nil,
-                poster: "#{DOMAINS[:kinopoisk][:poster][:name]}_#{item['id']}.jpg",
+                poster: poster,
                 profession: item['professionText'].present? ? item['professionText'] : nil
             }
             new_items.push(new_item)
@@ -224,7 +225,7 @@ module KinopoiskAPI
     end
 
     def creators
-      @json['creators'].any? ? @json['creators'] : nil
+      @json['creators'].present? ? @json['creators'] : nil
     end
 
   end
