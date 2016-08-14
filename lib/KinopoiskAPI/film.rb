@@ -225,7 +225,13 @@ module KinopoiskAPI
     end
 
     def creators
-      @json['creators'].nil? ? nil : @json['creators']
+
+      puts json
+
+      puts @json
+
+
+      @json['creators'].present? ? @json['creators'] : nil
     end
 
   end
