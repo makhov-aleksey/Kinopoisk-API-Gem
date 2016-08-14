@@ -220,7 +220,7 @@ module KinopoiskAPI
       if KinopoiskAPI::valid_json?(response)
         JSON.parse(response)
       else
-        nil
+        JSON.generate({error: 'Error retrieving JSON'})
       end
     end
 
