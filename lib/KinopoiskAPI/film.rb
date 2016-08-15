@@ -141,11 +141,19 @@ module KinopoiskAPI
     end
 
     def countries
-      @json['country'].present? ? @json['country'].split(',').map { |country| country.strip } : nil
+      if @json.present?
+        @json['country'].present? ? @json['country'].split(',').map { |country| country.strip } : nil
+      else
+        nil
+      end
     end
 
     def genres
-      @json['genre'].present? ?  @json['genre'].split(',').map { |genre| genre.strip } : nil
+      if @json.present?
+        @json['genre'].present? ?  @json['genre'].split(',').map { |genre| genre.strip } : nil
+      else
+        nil
+      end
     end
 
     def video

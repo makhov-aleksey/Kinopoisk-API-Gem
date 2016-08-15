@@ -55,7 +55,11 @@ module KinopoiskAPI
     end
 
     def creators
-      @json['creators'].nil? ? nil : @json['creators']
+      if @json.present?
+        @json['creators'].present? ? @json['creators'] : nil
+      else
+        nil
+      end
     end
 
   end
