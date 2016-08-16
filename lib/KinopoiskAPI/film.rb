@@ -62,74 +62,82 @@ module KinopoiskAPI
     end
 
     def kinopoisk
-      local_data = @json['ratingData']
+      if @json.present?
+        local_data = @json['ratingData']
 
-      if !local_data.nil?
-        rating = local_data['rating'].nil? ? nil : local_data['rating']
-        quantity = local_data['ratingVoteCount'].nil? ? nil : local_data['ratingVoteCount'].to_s.delete(' ').to_i
+        if !local_data.nil?
+          rating = local_data['rating'].nil? ? nil : local_data['rating']
+          quantity = local_data['ratingVoteCount'].nil? ? nil : local_data['ratingVoteCount'].to_s.delete(' ').to_i
 
-        good_reviews_in_percentage = local_data['ratingGoodReview'].nil? ? nil : local_data['ratingGoodReview']
-        number_of_good_reviews = local_data['ratingGoodReviewVoteCount'].nil? ? nil : local_data['ratingGoodReviewVoteCount'].to_s.delete(' ').to_i
+          good_reviews_in_percentage = local_data['ratingGoodReview'].nil? ? nil : local_data['ratingGoodReview']
+          number_of_good_reviews = local_data['ratingGoodReviewVoteCount'].nil? ? nil : local_data['ratingGoodReviewVoteCount'].to_s.delete(' ').to_i
 
-        waiting_in_percentage = local_data['ratingAwait'].nil? ? nil : local_data['ratingAwait']
-        number_of_waiting = local_data['ratingAwaitCount'].nil? ? nil : local_data['ratingAwaitCount'].to_s.delete(' ').to_i
+          waiting_in_percentage = local_data['ratingAwait'].nil? ? nil : local_data['ratingAwait']
+          number_of_waiting = local_data['ratingAwaitCount'].nil? ? nil : local_data['ratingAwaitCount'].to_s.delete(' ').to_i
 
-        film_critics_in_percentage = local_data['ratingFilmCritics'].nil? ? nil : local_data['ratingFilmCritics']
-        film_critics = local_data['ratingFilmCriticsVoteCount'].nil? ? nil : local_data['ratingFilmCriticsVoteCount'].to_s.delete(' ').to_i
+          film_critics_in_percentage = local_data['ratingFilmCritics'].nil? ? nil : local_data['ratingFilmCritics']
+          film_critics = local_data['ratingFilmCriticsVoteCount'].nil? ? nil : local_data['ratingFilmCriticsVoteCount'].to_s.delete(' ').to_i
 
-        rf_critics_in_percentage = local_data['ratingRFCritics'].nil? ? nil : local_data['ratingRFCritics']
-        rf_critics = local_data['ratingRFCriticsVoteCount'].nil? ? nil : local_data['ratingRFCriticsVoteCount'].to_s.delete(' ').to_i
+          rf_critics_in_percentage = local_data['ratingRFCritics'].nil? ? nil : local_data['ratingRFCritics']
+          rf_critics = local_data['ratingRFCriticsVoteCount'].nil? ? nil : local_data['ratingRFCriticsVoteCount'].to_s.delete(' ').to_i
+        else
+          rating = 0.0
+          quantity = 0
+
+          good_reviews_in_percentage = '0%'
+          number_of_good_reviews = 0
+
+          waiting_in_percentage = '0%'
+          number_of_waiting = 0
+
+          film_critics_in_percentage = '0%'
+          film_critics = 0
+
+          rf_critics_in_percentage = '0%'
+          rf_critics = 0
+        end
+
+        {
+            rating: rating,
+            quantity: quantity,
+
+            good_reviews_in_percentage: good_reviews_in_percentage,
+            number_of_good_reviews: number_of_good_reviews,
+
+            waiting_in_percentage: waiting_in_percentage,
+            number_of_waiting: number_of_waiting,
+
+            film_critics_in_percentage: film_critics_in_percentage,
+            film_critics: film_critics,
+
+            rf_critics_in_percentage: rf_critics_in_percentage,
+            rf_critics: rf_critics
+        }
       else
-        rating = 0.0
-        quantity = 0
-
-        good_reviews_in_percentage = '0%'
-        number_of_good_reviews = 0
-
-        waiting_in_percentage = '0%'
-        number_of_waiting = 0
-
-        film_critics_in_percentage = '0%'
-        film_critics = 0
-
-        rf_critics_in_percentage = '0%'
-        rf_critics = 0
+        nil
       end
-
-      {
-          rating: rating,
-          quantity: quantity,
-
-          good_reviews_in_percentage: good_reviews_in_percentage,
-          number_of_good_reviews: number_of_good_reviews,
-
-          waiting_in_percentage: waiting_in_percentage,
-          number_of_waiting: number_of_waiting,
-
-          film_critics_in_percentage: film_critics_in_percentage,
-          film_critics: film_critics,
-
-          rf_critics_in_percentage: rf_critics_in_percentage,
-          rf_critics: rf_critics
-      }
     end
 
     def imdb
-      local_data = @json['ratingData']
+      if @json.present?
+        local_data = @json['ratingData']
 
-      if !local_data.nil?
-        rating = local_data['ratingIMDb'].nil? ? 0.0 : local_data['ratingIMDb']
-        quantity = local_data['ratingIMDbVoteCount'].nil? ? 0 : local_data['ratingIMDbVoteCount'].to_s.delete(' ').to_i
+        if !local_data.nil?
+          rating = local_data['ratingIMDb'].nil? ? 0.0 : local_data['ratingIMDb']
+          quantity = local_data['ratingIMDbVoteCount'].nil? ? 0 : local_data['ratingIMDbVoteCount'].to_s.delete(' ').to_i
+        else
+          rating = 0.0
+          quantity = 0
+        end
+
+        {
+            id: @json['imdbID'],
+            rating: rating,
+            quantity: quantity
+        }
       else
-        rating = 0.0
-        quantity = 0
+        nil
       end
-
-      {
-          id: @json['imdbID'],
-          rating: rating,
-          quantity: quantity
-      }
     end
 
     def number_of_reviews
