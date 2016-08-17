@@ -14,6 +14,7 @@ module KinopoiskAPI
         creators.each do |items|
           new_items = []
           items.each do |item|
+            poster = item['posterURL'].present? ? "#{DOMAINS[:kinopoisk][:poster][:name]}_#{item['id']}.jpg" : nil
             new_item = {
                 id: item['id'],
                 url: "#{DOMAINS[:kinopoisk][:main]}/name/#{item['id']}",
@@ -21,7 +22,7 @@ module KinopoiskAPI
                     ru: item['nameRU'],
                     en: item['nameEN']
                 },
-                poster: "#{DOMAINS[:kinopoisk][:poster][:name]}_#{item['id']}.jpg",
+                poster: poster,
                 profession: item['professionText']
             }
             new_items.push(new_item)
