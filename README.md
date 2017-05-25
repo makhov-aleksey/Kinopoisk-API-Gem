@@ -1,15 +1,18 @@
 # КиноПоиск API (Gem)
 
-Гем основан на API от Andrzej Wielski: http://docs.kinopoiskapi.apiary.io/. Спасибо автору за такую великолепную реализацию.
-
 Этот gem создан для упрощения работы с КиноПоиск API в проектах Ruby on Rails.
+
+Гем основан официальном API от кинопоиска. Используется не официально, прикидываясь андройдом.
+Данный гем являеться форком проекта afuno/Kinopoisk-API-Gem, но т.к http://api.kinopoisk.cf/ не работает, то пришлось переделать для работы на прямую с кинопоиском.
+
+Используется версия api 3.11.0
 
 ## Установка
 
 Добавьте эту строку в Gemfile вашего приложения:
 
 ```ruby
-gem 'KinopoiskAPI' , github: 'afuno/Kinopoisk-API-Gem', branch: 'master'
+gem 'KinopoiskAPI' , github: 'alpha-ver/Kinopoisk-API-Gem', branch: 'master'
 ```
 
 Затем выполните:
@@ -164,6 +167,24 @@ genres.all
 * **id** - Идентификатор жанра на сайте КиноПоиск
 * **name** - Жанр на русском
 * **status** - Проверка полученного JSON (true или false)
+
+### Сегодня в кино
+
+```ruby
+today = KinopoiskAPI::TodayFilms.new
+```
+```ruby
+#   Список фильмов
+today.all
+```
+
+Доступен вывод следующей информации:
+
+* **id** - Идентификатор жанра на сайте КиноПоиск
+* **status** - Проверка полученного JSON (true или false)
+
+
+
 
 ### Глобавльный поиск
 
