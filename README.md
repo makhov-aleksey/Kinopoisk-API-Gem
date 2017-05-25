@@ -12,7 +12,7 @@
 Добавьте эту строку в Gemfile вашего приложения:
 
 ```ruby
-gem 'KinopoiskAPI' , github: 'alpha-ver/Kinopoisk-API-Gem', branch: 'master'
+gem 'KinopoiskAPI'
 ```
 
 Затем выполните:
