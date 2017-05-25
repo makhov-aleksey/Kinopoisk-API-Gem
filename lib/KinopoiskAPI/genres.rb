@@ -1,6 +1,6 @@
 module KinopoiskAPI
-  class Genres
-    attr_accessor :url, :json
+  class Genres < Agent
+    attr_accessor :url
 
     def initialize
       @url = "#{DOMAINS[:api]}/#{METHODS[:get_genres][:method]}"
@@ -19,21 +19,7 @@ module KinopoiskAPI
       correctly
     end
 
-    def status
-      json.nil? ? false : true
-    end
-
     private
-
-    def json
-      uri = URI(@url)
-      response = Net::HTTP.get(uri)
-      if KinopoiskAPI::valid_json?(response)
-        JSON.parse(response)
-      else
-        nil
-      end
-    end
 
     def genres
       @json['genreData']

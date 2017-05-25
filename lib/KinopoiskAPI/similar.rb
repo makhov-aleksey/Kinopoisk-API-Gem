@@ -1,10 +1,10 @@
 module KinopoiskAPI
-  class Similar
-    attr_accessor :id, :url, :json
+  class Similar < Agent
+    attr_accessor :id, :url
 
     def initialize(id)
-      @id = id
-      @url = "#{DOMAINS[:api]}/#{METHODS[:get_similar][:method]}?#{METHODS[:get_similar][:id]}=#{id}"
+      @id   = id
+      @url  = "#{DOMAINS[:api]}/#{METHODS[:get_similar][:method]}?#{METHODS[:get_similar][:id]}=#{id}&type=#{METHODS[:get_similar][:type]}"
       @json = json
     end
 
@@ -32,25 +32,11 @@ module KinopoiskAPI
       correctly
     end
 
-    def status
-      json.nil? ? false : true
-    end
-
     private
 
-    def json
-      uri = URI(@url)
-      response = Net::HTTP.get(uri)
-      if KinopoiskAPI::valid_json?(response)
-        JSON.parse(response)
-      else
-        nil
+      def items
+        @json['items']
       end
-    end
-
-    def items
-      @json['items']
-    end
 
   end
 end

@@ -1,6 +1,6 @@
 module KinopoiskAPI
-  class Gallery
-    attr_accessor :id, :url, :json
+  class Gallery < Agent
+    attr_accessor :id, :url
 
     def initialize(id)
       @id = id
@@ -28,21 +28,7 @@ module KinopoiskAPI
       all[name]
     end
 
-    def status
-      json.nil? ? false : true
-    end
-
     private
-
-    def json
-      uri = URI(@url)
-      response = Net::HTTP.get(uri)
-      if KinopoiskAPI::valid_json?(response)
-        JSON.parse(response)
-      else
-        nil
-      end
-    end
 
     def gallery
       @json['gallery']

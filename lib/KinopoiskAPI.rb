@@ -1,4 +1,5 @@
 require 'net/http'
+require 'KinopoiskAPI/agent'
 require 'KinopoiskAPI/film'
 require 'KinopoiskAPI/staff'
 require 'KinopoiskAPI/gallery'
@@ -6,11 +7,18 @@ require 'KinopoiskAPI/similar'
 require 'KinopoiskAPI/genres'
 require 'KinopoiskAPI/reviews'
 require 'KinopoiskAPI/global_search'
+require 'KinopoiskAPI/today_films'
 require 'KinopoiskAPI/version'
 
 module KinopoiskAPI
   DOMAINS = {
-      api: 'http://api.kinopoisk.cf',
+      api: 'https://ext.kinopoisk.ru/ios/3.11.0',
+      salt: 'a17qbcw1du0aedm',
+      headers: {
+        'Android-Api-Version' => '19',
+        'User-Agent'          => 'Android client (4.4 / api19), ru.kinopoisk/4.0.2 (52)',
+        'device'              => 'android'
+      },
       kinopoisk: {
           main: 'https://www.kinopoisk.ru',
           poster: {
@@ -23,7 +31,7 @@ module KinopoiskAPI
 
   METHODS = {
       get_film: {
-          method: 'getFilm',
+          method: 'getKPFilmDetailView',
           id: 'filmID'
       },
       get_gallery: {
@@ -31,21 +39,22 @@ module KinopoiskAPI
           id: 'filmID'
       },
       get_similar: {
-          method: 'getSimilar',
+          method: 'getKPFilmsList',
+          type: 'kp_similar_films',
           id: 'filmID'
       },
       get_name: {
-          method: 'getStaff',
+          method: 'getStaffList',
           id: 'filmID'
       },
       get_genres: {
-          method: 'getGenres'
+          method: 'getKPGenresView'
       },
       get_top_genre: {
           method: 'getTopGenre'
       },
       get_reviews: {
-          method: 'getReviews',
+          method: 'getKPReviews',
           id: 'filmID'
       },
       get_review_detail: {
@@ -56,7 +65,7 @@ module KinopoiskAPI
           method: 'getPeopleDetail'
       },
       get_today_films: {
-          method: 'getTodayFilms'
+          method: 'getKPTodayFilms'
       },
       get_cinemas: {
           method: 'getCinemas'
@@ -92,11 +101,11 @@ module KinopoiskAPI
           method: 'getBestFilms'
       },
       search_global: {
-          method: 'searchGlobal',
+          method: 'getKPGlobalSearch',
           keyword: 'keyword'
       },
       search_films: {
-          method: 'searchFilms',
+          method: 'getKPSearchInFilms',
           keyword: 'keyword'
       },
       search_people: {
@@ -116,15 +125,16 @@ module KinopoiskAPI
   }
 
   def self.api_access(url)
-    uri = URI.parse(url)
-    http = Net::HTTP.new(uri.host, uri.port)
-    response = http.request_head(uri.path)
-
-    if response.code == '200'
-      true
-    else
-      false
-    end
+    #uri = URI.parse(url)
+    #http = Net::HTTP.new(uri.host, uri.port)
+    #response = http.request_head(uri.path)
+    #
+    #if response.code == '200'
+    #  true
+    #else
+    #  false
+    #end
+    raise ToDo
   end
 
   def self.valid_json?(json)

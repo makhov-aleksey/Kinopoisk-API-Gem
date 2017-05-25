@@ -1,10 +1,10 @@
 module KinopoiskAPI
-  class Reviews
-    attr_accessor :id, :url, :json
+  class Reviews < Agent
+    attr_accessor :id, :url
 
     def initialize(id)
-      @id = id
-      @url = "#{DOMAINS[:api]}/#{METHODS[:get_reviews][:method]}?#{METHODS[:get_reviews][:id]}=#{id}"
+      @id   = id
+      @url  = "#{DOMAINS[:api]}/#{METHODS[:get_reviews][:method]}?#{METHODS[:get_reviews][:id]}=#{id}"
       @json = json
     end
 
@@ -56,25 +56,11 @@ module KinopoiskAPI
       correctly
     end
 
-    def status
-      json.nil? ? false : true
-    end
-
     private
 
-    def json
-      uri = URI(@url)
-      response = Net::HTTP.get(uri)
-      if KinopoiskAPI::valid_json?(response)
-        JSON.parse(response)
-      else
-        nil
+      def json_reviews
+        @json['reviews']
       end
-    end
-
-    def json_reviews
-      @json['reviews']
-    end
 
   end
 end

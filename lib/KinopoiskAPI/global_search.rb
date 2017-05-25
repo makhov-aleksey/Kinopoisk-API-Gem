@@ -1,10 +1,10 @@
 module KinopoiskAPI
-  class GlobalSearch
-    attr_accessor :keyword, :url, :json
+  class GlobalSearch < Agent
+    attr_accessor :keyword, :url
 
     def initialize(keyword)
-      @keyword = keyword
-      @url = "#{DOMAINS[:api]}/#{METHODS[:search_global][:method]}?#{METHODS[:search_global][:keyword]}=#{keyword}"
+      @keyword = URI.encode(keyword)
+      @url = "#{DOMAINS[:api]}/#{METHODS[:search_global][:method]}?#{METHODS[:search_global][:keyword]}=#{@keyword}"
       @json = json
     end
 
@@ -34,8 +34,8 @@ module KinopoiskAPI
     end
 
     def exactly
-      rating_array = json_exactly['rating'].delete(' ').split('(')
       {
+          id: json_exactly['id'],
           title: {
               ru: json_exactly['nameRU'],
               en: json_exactly['nameEN']
@@ -45,8 +45,7 @@ module KinopoiskAPI
           year: json_exactly['year'],
           countries: json_exactly['country'].split(',').map { |country| country.strip },
           genres: json_exactly['genre'].split(',').map { |genre| genre.strip },
-          rating: rating_array.first,
-          number_of_rated: rating_array.last.delete(')'),
+          rating: json_exactly['rating'],
           poster: "#{DOMAINS[:kinopoisk][:poster][:film]}_#{json_exactly['id']}.jpg"
       }
     end
@@ -54,8 +53,8 @@ module KinopoiskAPI
     def maybe
       correctly = []
       json_films.each do |film|
-        rating_array = film['rating'].delete(' ').split('(')
         new_item = {
+            id: json_exactly['id'],
             title: {
                 ru: json_exactly['nameRU'],
                 en: json_exactly['nameEN']
@@ -65,8 +64,6 @@ module KinopoiskAPI
             year: film['year'],
             countries: film['country'].split(',').map { |country| country.strip },
             genres: film['genre'].split(',').map { |genre| genre.strip },
-            rating: rating_array.first,
-            number_of_rated: rating_array.last.delete(')'),
             poster: "#{DOMAINS[:kinopoisk][:poster][:film]}_#{film['id']}.jpg"
         }
         correctly.push(new_item)
@@ -90,21 +87,7 @@ module KinopoiskAPI
       correctly
     end
 
-    def status
-      json.nil? ? false : true
-    end
-
     private
-
-    def json
-      uri = URI(URI.encode(@url))
-      response = Net::HTTP.get(uri)
-      if KinopoiskAPI::valid_json?(response)
-        JSON.parse(response)
-      else
-        nil
-      end
-    end
 
     def json_exactly
       @json['youmean']

@@ -1,6 +1,6 @@
 module KinopoiskAPI
-  class Staff
-    attr_accessor :id, :url, :json
+  class Staff < Agent
+    attr_accessor :id, :url
 
     def initialize(id)
       @id = id
@@ -14,6 +14,7 @@ module KinopoiskAPI
         creators.each do |items|
           new_items = []
           items.each do |item|
+            poster = item['posterURL'].present? ? "#{DOMAINS[:kinopoisk][:poster][:name]}_#{item['id']}.jpg" : nil
             new_item = {
                 id: item['id'],
                 url: "#{DOMAINS[:kinopoisk][:main]}/name/#{item['id']}",
@@ -21,7 +22,7 @@ module KinopoiskAPI
                     ru: item['nameRU'],
                     en: item['nameEN']
                 },
-                poster: "#{DOMAINS[:kinopoisk][:poster][:name]}_#{item['id']}.jpg",
+                poster: poster,
                 profession: item['professionText']
             }
             new_items.push(new_item)
@@ -38,29 +39,15 @@ module KinopoiskAPI
       all[name]
     end
 
-    def status
-      json.nil? ? false : true
-    end
-
     private
 
-    def json
-      uri = URI(@url)
-      response = Net::HTTP.get(uri)
-      if KinopoiskAPI::valid_json?(response)
-        JSON.parse(response)
-      else
-        nil
+      def creators
+        if @json.present?
+          @json['creators'].present? ? @json['creators'] : nil
+        else
+          nil
+        end
       end
-    end
-
-    def creators
-      if @json.present?
-        @json['creators'].present? ? @json['creators'] : nil
-      else
-        nil
-      end
-    end
 
   end
 end
