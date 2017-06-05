@@ -1,14 +1,20 @@
 require 'net/http'
+require 'KinopoiskAPI/api_error'
 require 'KinopoiskAPI/agent'
 require 'KinopoiskAPI/film'
-require 'KinopoiskAPI/staff'
-require 'KinopoiskAPI/gallery'
-require 'KinopoiskAPI/similar'
-require 'KinopoiskAPI/genres'
-require 'KinopoiskAPI/reviews'
-require 'KinopoiskAPI/global_search'
-require 'KinopoiskAPI/today_films'
+require 'KinopoiskAPI/people'
+require 'KinopoiskAPI/category'
+require 'KinopoiskAPI/today'
+require 'KinopoiskAPI/top'
+
+
+#require 'KinopoiskAPI/reviews'
+#require 'KinopoiskAPI/gallery'
+#require 'KinopoiskAPI/similar'
+#require 'KinopoiskAPI/global_search'
+
 require 'KinopoiskAPI/version'
+
 
 module KinopoiskAPI
   DOMAINS = {
@@ -34,6 +40,10 @@ module KinopoiskAPI
           method: 'getKPFilmDetailView',
           id: 'filmID'
       },
+      get_staff: {
+          method: 'getStaffList',
+          id: 'filmID'
+      },
       get_gallery: {
           method: 'getGallery',
           id: 'filmID'
@@ -43,16 +53,11 @@ module KinopoiskAPI
           type: 'kp_similar_films',
           id: 'filmID'
       },
-      get_name: {
-          method: 'getStaffList',
-          id: 'filmID'
+
+      navigator_filters:{
+        method: 'navigatorFilters'
       },
-      get_genres: {
-          method: 'getKPGenresView'
-      },
-      get_top_genre: {
-          method: 'getTopGenre'
-      },
+
       get_reviews: {
           method: 'getKPReviews',
           id: 'filmID'
@@ -61,8 +66,11 @@ module KinopoiskAPI
           method: 'getReviewDetail',
           id: 'reviewID'
       },
-      get_people_detail: {
-          method: 'getPeopleDetail'
+
+      get_people: {
+          method: 'getKPPeopleDetailView',
+          id:     'peopleID'
+
       },
       get_today_films: {
           method: 'getKPTodayFilms'
@@ -137,9 +145,9 @@ module KinopoiskAPI
     raise ToDo
   end
 
-  def self.valid_json?(json)
+  def self.valid_json?(j)
     begin
-      JSON.parse(json)
+      JSON.parse(j)
       return true
     rescue JSON::ParserError => e
       return false
