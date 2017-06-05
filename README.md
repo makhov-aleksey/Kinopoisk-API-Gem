@@ -112,7 +112,7 @@ today.view
 today.film_ids
 ```
 
-### Глобальный поиск 
+### Глобальный поиск
 
 ```ruby
 search = KinopoiskAPI::GlobalSearch.new('Звездные')
@@ -131,10 +131,10 @@ search.peoples
 ```
 
 
-### Поиск по фильмам 
+### Поиск по фильмам
 
 ```ruby
-search = KinopoiskAPI::FilmSearch.new('Звездные')
+search = KinopoiskAPI::FilmSearch.new('Q')
 ```
 
 ```ruby
@@ -165,6 +165,38 @@ search.next_page
 ```
 
 
+### Поиск по людям
+
+```ruby
+search = KinopoiskAPI::PeopleSearch.new('Q')
+```
+
+```ruby
+#   Список людей (не более 20)
+search.view
+```
+
+```ruby
+#   Колличество найденных фильмов
+search.peoples_count
+```
+
+```ruby
+#   Текущая страница
+search.current_page
+```
+
+```ruby
+#   Колличество страниц
+search.page_count
+```
+
+```ruby
+#   Следующая страница
+search.next_page
+#   > true  [Полученна следующая станица]
+#   > false [Достигли конца пагинации]
+```
 
 
 
@@ -178,7 +210,7 @@ search.next_page
 
 
 _______________________________________________________________________________
-
+НИЖЕ НЕ ЧЕГО НЕТ
 _______________________________________________________________________________
 
 

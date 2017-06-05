@@ -1,17 +1,17 @@
 module KinopoiskAPI
-  class FilmSearch < Agent
+  class PeopleSearch < Agent
     attr_accessor :keyword, :url
 
     def initialize(keyword)
-      @keyword = URI.encode(keyword)
-      @page = 1
+      @keyword    = URI.encode(keyword)
+      @page       = 1
       gen_url
-      @json = json
+      @json       = json
       @page_count = @json['pagesCount']
     end
 
-    def films_count
-      @json['searchFilmsCountResult']
+    def peoples_count
+      @json['searchPeoplesCountResult']
     end
 
     def page_count
@@ -23,8 +23,8 @@ module KinopoiskAPI
     end
 
     def view
-      @json['searchFilms'].map do |film|
-        film_hash(film)
+      @json['searchPeople'].map do |film|
+        people_hash(film)
       end
     end
 
@@ -43,9 +43,9 @@ module KinopoiskAPI
 
       def gen_url
         @url = [
-          "#{DOMAINS[:api]}/#{METHODS[:search_film][:method]}",
-          "?#{METHODS[:search_film][:keyword]}=#{@keyword}",
-          "&#{METHODS[:search_film][:page]}=#{@page}"
+          "#{DOMAINS[:api]}/#{METHODS[:search_people][:method]}",
+          "?#{METHODS[:search_people][:keyword]}=#{@keyword}",
+          "&#{METHODS[:search_people][:page]}=#{@page}"
         ].join('')
       end
 

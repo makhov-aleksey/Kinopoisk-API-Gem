@@ -21,7 +21,7 @@ module KinopoiskAPI
           {
             id:       int_data(String, item["id"      ]),
             name:     str_data(String, item["name"    ]),
-            popular: bool_data(String, item["popular" ])
+            popular:  bool_data(String, item["popular" ])
           }
         end
       end

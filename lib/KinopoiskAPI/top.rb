@@ -5,6 +5,7 @@ module KinopoiskAPI
     def initialize
       @url  = "#{DOMAINS[:api]}/#{METHODS[:get_today_films][:method]}"
       @json = json
+      raise todo
     end
 
     def films_view
@@ -33,15 +34,8 @@ module KinopoiskAPI
       end
     end
 
-    def films_ids
-      films.map{|film| int_data(String, film['id'], nil) }.compact
-    end
-
     private
 
-      def films
-        @json['filmsData']
-      end
 
   end
 end

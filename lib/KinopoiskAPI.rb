@@ -8,6 +8,7 @@ require 'KinopoiskAPI/today'
 require 'KinopoiskAPI/top'
 require 'KinopoiskAPI/global_search'
 require 'KinopoiskAPI/film_search'
+require 'KinopoiskAPI/people_search'
 
 
 #require 'KinopoiskAPI/reviews'
@@ -146,8 +147,9 @@ module KinopoiskAPI
           page:    'page'
       },
       search_people: {
-          method: 'searchPeople',
-          keyword: 'keyword'
+          method:  'getKPSearchInPeople',
+          keyword: 'keyword',
+          page:    'page'
       },
 
       search_cinemas: {
