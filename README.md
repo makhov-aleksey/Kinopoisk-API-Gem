@@ -39,6 +39,7 @@ film.rating
 ```ruby
 # Даты премьер и т.д.
 film.rent
+```
 
 ```ruby
 # Бюджет и сборы.
@@ -111,6 +112,57 @@ today.view
 today.film_ids
 ```
 
+### Глобальный поиск 
+
+```ruby
+search = KinopoiskAPI::GlobalSearch.new('Звездные')
+```
+```ruby
+#   Скорее всего вы искали этот фильм
+search.exactly
+```
+```ruby
+#   Возможно, вы искали эти фильмы
+search.maybe
+```
+```ruby
+#   Или даже этих людей
+search.peoples
+```
+
+
+### Поиск по фильмам 
+
+```ruby
+search = KinopoiskAPI::FilmSearch.new('Звездные')
+```
+
+```ruby
+#   Список фильмов (не более 20)
+search.view
+```
+
+```ruby
+#   Колличество найденных фильмов
+search.films_count
+```
+
+```ruby
+#   Текущая страница
+search.current_page
+```
+
+```ruby
+#   Колличество страниц
+search.page_count
+```
+
+```ruby
+#   Следующая страница
+search.next_page
+#   > true  [Полученна следующая станица]
+#   > false [Достигли конца пагинации]
+```
 
 
 
@@ -125,14 +177,9 @@ today.film_ids
 
 
 
+_______________________________________________________________________________
 
-
-
-
-
-
-
-
+_______________________________________________________________________________
 
 
 
@@ -216,26 +263,6 @@ genres.all
 * **id** - Идентификатор жанра на сайте КиноПоиск
 * **status** - Проверка полученного JSON (true или false)
 
-
-
-
-### Глобавльный поиск
-
-```ruby
-global_search = KinopoiskAPI::GlobalSearch.new('Звездные')
-```
-```ruby
-#   Скорее всего вы искали этот фильм
-global_search.exactly
-```
-```ruby
-#   Возможно, вы искали эти фильмы
-global_search.maybe
-```
-```ruby
-#   Или даже этих людей
-global_search.names
-```
 
 Доступен вывод следующей информации:
 

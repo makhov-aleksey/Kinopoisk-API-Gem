@@ -15,29 +15,7 @@ module KinopoiskAPI
     end
 
     def view
-      {
-        id:                     @id,
-        kp_type:                str_data(nil, 'type'),
-        name_ru:                str_data(nil, 'nameRU'),
-        name_en:                str_data(nil, 'nameEN'),
-        slogan:                 str_data(nil, 'slogan'),
-        description:            str_data(nil, 'description'),
-        poster_url:             url_data(nil, 'posterURL', @id, :film),
-        year:                   int_data(nil, 'year'),
-        year_end:               nil, #@to_do
-        reviews_count:          int_data(nil, 'reviewsCount'),
-        duration:               min_data(nil, 'filmLength'),
-        countries:              arr_data(nil, 'country'),
-        genres:                 arr_data(nil, 'genre'),
-        video:                  @json['videoURL'],
-        is_sequel_or_prequel:   bool_data(nil, 'hasSequelsAndPrequelsFilms'),
-        is_similar_films:       bool_data(nil, 'hasRelatedFilms'),
-        is_imax:                bool_data(nil, 'isIMAX'),
-        is_3d:                  bool_data(nil, 'is3D'),
-        rating_mpaa:            str_data(nil, 'ratingMPAA'),
-        minimal_age:            int_data(nil, 'ratingAgeLimits')
-
-      }.merge(rating).merge(rent).merge(budget)
+      film_hash(@json).merge(rating).merge(rent).merge(budget)
     end
 
     def rating
@@ -82,7 +60,7 @@ module KinopoiskAPI
       unless @json['creators'].nil?
         @json['creators'].map { |items|
           items.map do |item|
-            people_hash(item)
+            people_hash_old(item)
           end
         }.flatten
       end
@@ -93,7 +71,7 @@ module KinopoiskAPI
       unless @json2['creators'].nil?
         @json2['creators'].map { |items|
           items.map do |item|
-            people_hash(item)
+            people_hash_old(item)
           end
         }.flatten
       end
@@ -106,7 +84,7 @@ module KinopoiskAPI
 
     private
 
-      def people_hash(item)
+      def people_hash_old(item)
         Hash[
           [
             [:id,              item['id'].to_i       ],

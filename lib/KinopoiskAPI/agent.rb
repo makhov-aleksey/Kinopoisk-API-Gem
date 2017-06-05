@@ -90,6 +90,25 @@ module KinopoiskAPI
         end
       end
 
+      def year_data(data, name, point=:start)
+        s = dn(data, name)
+
+        if s.nil?
+          nil
+        else
+          if s.size == 4 && point == :start
+            s.to_i
+          else s.size == 9
+            arr = s.scan(/(\d{4})/).flatten
+            if point == :start
+              arr[0].to_i
+            elsif point == :end
+              arr[1].to_i
+            end
+          end
+        end
+      end
+
       def time_data(data, name)
         s = dn(data, name)
         if !s.nil?
@@ -148,6 +167,49 @@ module KinopoiskAPI
         s = dn(data, name)
         s.nil? ? nil : "#{DOMAINS[:kinopoisk][:poster][poster_name]}_#{id}.jpg"
       end
+
+
+      def film_hash(h)
+        {
+          id:                     int_data(String,  h['id'          ]),
+          kp_type:                str_data(String,  h['type'        ]),
+          name_ru:                str_data(String,  h['nameRU'      ]),
+          name_en:                str_data(String,  h['nameEN'      ]),
+          slogan:                 str_data(String,  h['slogan'      ]),
+          description:            str_data(String,  h['description' ]),
+          poster_url:             url_data(String,  h['posterURL'   ], h['id'], :film),
+          year:                   year_data(String, h['year'        ], :start),
+          year_end:               year_data(String, h['year'        ], :end),
+          reviews_count:          int_data(String,  h['reviewsCount']),
+          duration:               min_data(String,  h['filmLength'  ]),
+          countries:              arr_data(String,  h['country'     ]),
+          genres:                 arr_data(String,  h['genre'       ]),
+          video:                  h['videoURL'],
+          is_sequel_or_prequel:   bool_data(String, h['hasSequelsAndPrequelsFilms']),
+          is_similar_films:       bool_data(String, h['hasRelatedFilms'           ]),
+          is_imax:                bool_data(String, h['isIMAX'                    ]),
+          is_3d:                  bool_data(String, h['is3D'                      ]),
+          rating_mpaa:            str_data(String,  h['ratingMPAA'                ]),
+          minimal_age:            int_data(String,  h['ratingAgeLimits'           ])
+        }
+      end
+
+      def people_hash(h)
+        {
+          :id          => int_data(String,      h['id'        ]),
+          :kp_type     => str_data(String,      h['type'      ]),
+          :name_ru     => str_data(String,      h['nameRU'    ]),
+          :name_en     => str_data(String,      h['nameEN'    ]),
+          :poster_url  => url_data(String,      h['posterURL' ], @id, :name),
+          :sex         => str_data(String,      h['sex'       ]),
+          :growth      => int_data(String,      h['growth'    ]),
+          :birthday    => time_data(String,     h['birthday'  ]),
+          :birthplace  => str_data(String,      h['sex'       ]),
+          :has_awards  => bool_data(String,     h['has_awards']),
+          :profession  => s2a(str_data(String,  h['profession']))
+        }
+      end
+
 
 
 

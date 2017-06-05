@@ -6,12 +6,13 @@ require 'KinopoiskAPI/people'
 require 'KinopoiskAPI/category'
 require 'KinopoiskAPI/today'
 require 'KinopoiskAPI/top'
+require 'KinopoiskAPI/global_search'
+require 'KinopoiskAPI/film_search'
 
 
 #require 'KinopoiskAPI/reviews'
 #require 'KinopoiskAPI/gallery'
 #require 'KinopoiskAPI/similar'
-#require 'KinopoiskAPI/global_search'
 
 require 'KinopoiskAPI/version'
 
@@ -37,12 +38,12 @@ module KinopoiskAPI
 
   METHODS = {
       get_film: {
-          method: 'getKPFilmDetailView',
-          id: 'filmID'
+        method: 'getKPFilmDetailView',
+        id: 'filmID'
       },
       get_staff: {
-          method: 'getStaffList',
-          id: 'filmID'
+        method: 'getStaffList',
+        id: 'filmID'
       },
       get_gallery: {
           method: 'getGallery',
@@ -57,6 +58,34 @@ module KinopoiskAPI
       navigator_filters:{
         method: 'navigatorFilters'
       },
+
+
+
+      get_top_100_popular: {
+        method: 'getKPTop',
+        type:   'kp_item_top_popular_films'
+      },
+
+      get_top_100_await: {
+        method: 'getKPTop',
+        type:   'kp_item_top_await'
+      },
+
+      get_top_100_people: {
+        method: 'getKPTop',
+        type:   'kp_item_top_popular_people'
+      },
+
+      get_top_250_best:{
+        method: 'getKPTop',
+        type:  'kp_item_top_best_film'
+      },
+
+      get_top_100_gross:{
+        method: 'getKPTop',
+        type:   'kp_item_most_box_office',
+      },
+
 
       get_reviews: {
           method: 'getKPReviews',
@@ -102,24 +131,25 @@ module KinopoiskAPI
       get_dates_for_soon_dvd: {
           method: 'getDatesForSoonDVD'
       },
-      get_top: {
-          method: 'getTop'
-      },
+
       get_best_films: {
           method: 'getBestFilms'
       },
+
       search_global: {
           method: 'getKPGlobalSearch',
           keyword: 'keyword'
       },
-      search_films: {
+      search_film: {
           method: 'getKPSearchInFilms',
-          keyword: 'keyword'
+          keyword: 'keyword',
+          page:    'page'
       },
       search_people: {
           method: 'searchPeople',
           keyword: 'keyword'
       },
+
       search_cinemas: {
           method: 'searchCinemas',
           keyword: 'keyword'
