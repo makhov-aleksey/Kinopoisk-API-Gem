@@ -5,6 +5,10 @@ module KinopoiskAPI
       @json[:resultCode].nil? ? true : false
     end
 
+    def status2
+      @json[:resultCode].nil? ? true : false
+    end
+
     def data
       @json
     end
@@ -36,11 +40,15 @@ module KinopoiskAPI
         query     = URI.decode_www_form(String(uri.query)) << ["key", key]
         uri.query = URI.encode_www_form(query)
 
-        puts "[GET] -> " + uri.to_s
+        print "[GET] -> " + uri.to_s
+        get_time = Time.now
 
-        http         = Net::HTTP.new(uri.host, uri.port)
-        http.use_ssl = true
-        response     = http.get(uri.request_uri, DOMAINS[:headers])
+        http              = Net::HTTP.new(uri.host, uri.port)
+        http.read_timeout = 10
+        http.use_ssl      = true
+        response          = http.get(uri.request_uri, DOMAINS[:headers])
+
+        print " <- [#{(Time.now-get_time).round 3}s]\n"
 
         if KinopoiskAPI::valid_json?(response.body)
           j = JSON.parse(response.body)
@@ -112,14 +120,21 @@ module KinopoiskAPI
       def time_data(data, name)
         s = dn(data, name)
         if !s.nil?
+
           if s.size == 10
-            Date.parse(s)
+            d=Date.parse(s) rescue nil
+            if d.nil?
+              s=s.gsub('00.', '01.')
+              d=Date.parse(s) rescue nil
+            end
+            d
           else
             year = s.scan(/\d{4}/)[0]
             if !year.nil?
               Date.parse("01.01.#{year}") #only year???
             end
           end
+
         end
       end
 
@@ -169,15 +184,15 @@ module KinopoiskAPI
       end
 
 
-      def film_hash(h)
+      def film_hash(h, id='filmID')
         {
-          id:                     int_data(String,  h['id'          ]),
+          id:                     int_data(String,  h[id            ]),
           kp_type:                str_data(String,  h['type'        ]),
           name_ru:                str_data(String,  h['nameRU'      ]),
           name_en:                str_data(String,  h['nameEN'      ]),
           slogan:                 str_data(String,  h['slogan'      ]),
           description:            str_data(String,  h['description' ]),
-          poster_url:             url_data(String,  h['posterURL'   ], h['id'], :film),
+          poster_url:             url_data(String,  h['posterURL'   ], h[id], :film),
           year:                   year_data(String, h['year'        ], :start),
           year_end:               year_data(String, h['year'        ], :end),
           reviews_count:          int_data(String,  h['reviewsCount']),

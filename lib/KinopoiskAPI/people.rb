@@ -15,14 +15,14 @@ module KinopoiskAPI
     def view
       {
         :id          => @id,
-        :kp_type     => str_data(nil, 'type'),
+        :kp_type     => str_data(nil, 'class'),
         :name_ru     => str_data(nil, 'nameRU'),
         :name_en     => str_data(nil, 'nameEN'),
         :poster_url  => url_data(nil, 'posterURL', @id, :name),
         :sex         => str_data(nil, 'sex'),
         :growth      => int_data(nil, 'growth'),
         :birthday    => time_data(nil, 'birthday'),
-        :birthplace  => str_data(nil, 'sex'),
+        :birthplace  => str_data(nil, 'birthplace'),
         :has_awards  => bool_data(nil, 'has_awards'),
         :profession  => s2a(str_data(nil, 'profession'))
       }
