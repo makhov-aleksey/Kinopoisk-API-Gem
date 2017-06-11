@@ -6,12 +6,12 @@ require 'KinopoiskAPI/version'
 Gem::Specification.new do |spec|
   spec.name          = 'KinopoiskAPI'
   spec.version       = KinopoiskAPI::VERSION
-  spec.authors       = ['proFox']
-  spec.email         = ['admin@byprofox.com']
+  spec.authors       = ['Alexey Vildyaev']
+  spec.email         = ['hav0k@me.com']
 
   spec.summary       = %q{Gem for operation with Kinopoisk API}
-  spec.description   = %q{Gem is based on the API from the author: http://docs.kinopoiskapi.apiary.io}
-  spec.homepage      = 'https://github.com/afuno/Kinopoisk-API-Gem/'
+  spec.description   = %q{Gem is based on the mobile API}
+  spec.homepage      = 'https://github.com/alpha-ver/Kinopoisk-API-Gem'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
