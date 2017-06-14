@@ -186,7 +186,7 @@ module KinopoiskAPI
 
       def film_hash(h, id='filmID')
         {
-          id:                     int_data(String,  h[id            ]),
+          id:                     int_data(String,  h['id'          ]),
           kp_type:                str_data(String,  h['type'        ]),
           name_ru:                str_data(String,  h['nameRU'      ]),
           name_en:                str_data(String,  h['nameEN'      ]),
