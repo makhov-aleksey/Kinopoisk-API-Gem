@@ -186,13 +186,13 @@ module KinopoiskAPI
 
       def film_hash(h, id='filmID')
         {
-          id:                     int_data(String,  h['id'          ]),
+          id:                     int_data(String,  h[id            ]),
           kp_type:                str_data(String,  h['type'        ]),
           name_ru:                str_data(String,  h['nameRU'      ]),
           name_en:                str_data(String,  h['nameEN'      ]),
           slogan:                 str_data(String,  h['slogan'      ]),
           description:            str_data(String,  h['description' ]),
-          poster_url:             url_data(String,  h['posterURL'   ], h['id'], :film),
+          poster_url:             url_data(String,  h['posterURL'   ], h[id], :film),
           year:                   year_data(String, h['year'        ], :start),
           year_end:               year_data(String, h['year'        ], :end),
           reviews_count:          int_data(String,  h['reviewsCount']),

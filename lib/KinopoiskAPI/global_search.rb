@@ -17,12 +17,12 @@ module KinopoiskAPI
     end
 
     def youmean
-      film_hash(@json['youmean'])
+      film_hash(@json['youmean'], 'id')
     end
 
     def films
       @json['searchFilms'].map do |film|
-        film_hash(film)
+        film_hash(film, 'id')
       end
     end
 
